@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Kann-ich-Trainer Mathematik NT 12 – Fachabitur</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Formeln werden lokal per CSS gerendert, keine externen Bibliotheken nötig -->
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 980px; margin: 0 auto; padding: 16px;
+    background: #fafafa; color: #222; line-height: 1.55;
+  }
+  h1 { font-size: 1.6em; margin-bottom: 4px; }
+  .subtitle { color: #666; margin-bottom: 20px; }
+  .summary {
+    background: #fff; border: 1px solid #ddd; border-radius: 8px;
+    padding: 12px 16px; margin-bottom: 20px;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  }
+  .summary-item { font-size: 0.95em; }
+  .summary-item strong { font-size: 1.2em; }
+  .ok { color: #2a7d2a; }
+  .uebe { color: #b8860b; }
+  .offen { color: #777; }
+  details.block {
+    background: #fff; border: 1px solid #ccc; border-radius: 8px;
+    margin-bottom: 14px; padding: 0;
+  }
+  details.block > summary {
+    padding: 12px 16px; font-weight: bold; font-size: 1.05em;
+    cursor: pointer; background: #eef3f8; border-radius: 8px;
+    list-style: none;
+  }
+  details.block > summary::before {
+    content: "▶ "; font-size: 0.8em; color: #555;
+  }
+  details.block[open] > summary::before { content: "▼ "; }
+  details.block > summary .badge {
+    float: right; font-weight: normal; font-size: 0.85em;
+    color: #555;
+  }
+  .item {
+    border-top: 1px solid #eee;
+    padding: 12px 16px;
+  }
+  .item-title {
+    font-weight: 600; cursor: pointer; user-select: none;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 8px;
+  }
+  .item-title:hover { color: #1a4d8c; }
+  .item-status { font-size: 0.85em; padding: 2px 8px; border-radius: 12px; white-space: nowrap; }
+  .status-offen { background: #eee; color: #666; }
+  .status-ok { background: #d4eed4; color: #1a5e1a; }
+  .status-uebe { background: #fde7b3; color: #8a5a00; }
+  .item-body { display: none; margin-top: 10px; }
+  .item.open .item-body { display: block; }
+  details.sub {
+    margin: 8px 0; border: 1px solid #e0e0e0; border-radius: 6px;
+    background: #f9f9f9;
+  }
+  details.sub > summary {
+    padding: 8px 12px; cursor: pointer; font-size: 0.95em; font-weight: 500;
+    list-style: none;
+  }
+  details.sub > summary::before { content: "▸ "; color: #888; }
+  details.sub[open] > summary::before { content: "▾ "; color: #555; }
+  details.sub.hint > summary { background: #fff7e6; border-radius: 6px; }
+  details.sub.solution > summary { background: #eaf3ff; border-radius: 6px; }
+  details.sub > div { padding: 8px 14px 12px 14px; }
+  .aufgabe {
+    background: #f4f4f4; padding: 10px 14px; border-left: 3px solid #888;
+    border-radius: 4px; margin: 6px 0 12px 0;
+  }
+  .buttons {
+    display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap;
+  }
+  .btn {
+    padding: 8px 14px; border: 1px solid #999; border-radius: 6px;
+    background: #fff; cursor: pointer; font-size: 0.95em;
+  }
+  .btn:hover { background: #f0f0f0; }
+  .btn-ok { border-color: #2a7d2a; color: #1a5e1a; }
+  .btn-ok:hover { background: #e6f5e6; }
+  .btn-uebe { border-color: #b8860b; color: #8a5a00; }
+  .btn-uebe:hover { background: #fff5e0; }
+  .btn-reset { border-color: #999; color: #555; font-size: 0.85em; padding: 4px 10px; }
+  .info-box {
+    background: #eef7ee; border-left: 4px solid #2a7d2a; padding: 10px 14px;
+    margin-bottom: 16px; border-radius: 4px; font-size: 0.92em;
+  }
+  .progress-bar {
+    height: 8px; background: #eee; border-radius: 4px; overflow: hidden;
+    margin-top: 8px;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, #2a7d2a, #5cb85c);
+    width: 0%; transition: width 0.3s;
+  }
+  hr.sep { border: none; border-top: 2px solid #ccc; margin: 30px 0 20px 0; }
+
+  /* === Formelanzeige (ohne MathJax) === */
+  .math {
+    font-family: "Cambria Math", "Latin Modern Math", "STIX Two Math", Cambria, "Times New Roman", serif;
+    font-style: italic;
+    white-space: nowrap;
+    padding: 0 1px;
+  }
+  .math-display {
+    font-family: "Cambria Math", "Latin Modern Math", Cambria, "Times New Roman", serif;
+    font-style: italic;
+    text-align: center;
+    margin: 10px 0;
+    font-size: 1.05em;
+  }
+  .math sup, .math sub { font-style: normal; font-size: 0.75em; }
+  .math .frac {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: -0.5em;
+    text-align: center;
+    margin: 0 1px;
+    font-size: 0.95em;
+    line-height: 1;
+  }
+  .math .frac .num { border-bottom: 1px solid currentColor; padding: 0 3px; }
+  .math .frac .den { padding: 1px 3px 0 3px; }
+  .math .binom {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    margin: 0 1px;
+  }
+  .math .binom .num, .math .binom .den {
+    display: block;
+    text-align: center;
+    padding: 0 2px;
+    font-size: 0.9em;
+    line-height: 1.1;
+  }
+  .math .binom > span:nth-child(2) {
+    display: inline-flex;
+    flex-direction: column;
+    font-size: 0.9em;
+  }
+  .math .overline {
+    text-decoration: overline;
+    text-decoration-thickness: 1px;
+  }
+  h2.section {
+    color: #1a4d8c; margin-top: 10px; margin-bottom: 12px;
+    font-size: 1.3em; border-bottom: 2px solid #1a4d8c; padding-bottom: 4px;
+  }
+  .kbd {
+    background: #fff; padding: 1px 6px; border: 1px solid #bbb;
+    border-radius: 3px; font-family: monospace; font-size: 0.9em;
+  }
+  @media print {
+    .buttons, .btn-reset { display: none; }
+    .item-body { display: block !important; }
+    details > div, details.sub > div { display: block !important; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Kann-ich-Trainer Mathematik NT 12</h1>
+<div class="subtitle">Vorbereitung Fachabitur Nichttechnik – Analysis &amp; Stochastik (11./12. Klasse)</div>
+
+<div class="info-box">
+  <strong>So funktioniert's:</strong> Jede Kompetenz aus der Kann-Liste hat eine kurze Übungsaufgabe.
+  Versuche die Aufgabe zuerst selbst. Brauchst du den <em>Lösungshinweis</em> nicht und stimmt deine Lösung mit der
+  <em>Musterlösung</em> überein → Klick auf <span class="btn btn-ok" style="display:inline-block; padding:2px 8px;">Kann ich</span>.
+  Sonst: <span class="btn btn-uebe" style="display:inline-block; padding:2px 8px;">Muss ich noch üben</span>.
+  Dein Fortschritt wird automatisch im Browser gespeichert.
+</div>
+
+<div class="summary" id="summary">
+  <div class="summary-item"><strong id="cnt-ok" class="ok">0</strong> kann ich</div>
+  <div class="summary-item"><strong id="cnt-uebe" class="uebe">0</strong> muss ich üben</div>
+  <div class="summary-item"><strong id="cnt-offen" class="offen">0</strong> offen</div>
+  <div class="summary-item"><strong id="cnt-total">0</strong> gesamt</div>
+  <button class="btn btn-reset" onclick="resetAll()">Alles zurücksetzen</button>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+
+<h2 class="section">Teil A: Analysis</h2>
+
+<!-- =================== ANALYSIS BLOCK 1: Lineare Funktionen =================== -->
+<details class="block" open>
+  <summary>1. Lineare Funktionen (11. Klasse) <span class="badge" id="badge-block-1"></span></summary>
+  <div id="block-1"></div>
+</details>
+
+<details class="block">
+  <summary>2. Quadratische Funktionen (11. Klasse) <span class="badge" id="badge-block-2"></span></summary>
+  <div id="block-2"></div>
+</details>
+
+<details class="block">
+  <summary>3. Ganzrationale Funktionen höheren Grades (11. Klasse) <span class="badge" id="badge-block-3"></span></summary>
+  <div id="block-3"></div>
+</details>
+
+<details class="block">
+  <summary>4. Differenzialrechnung bei ganzrationalen Funktionen (11. Klasse) <span class="badge" id="badge-block-4"></span></summary>
+  <div id="block-4"></div>
+</details>
+
+<details class="block">
+  <summary>5. Vertiefende Aspekte der Kurvendiskussion (12. Klasse) <span class="badge" id="badge-block-5"></span></summary>
+  <div id="block-5"></div>
+</details>
+
+<details class="block">
+  <summary>6. Steckbriefaufgaben (12. Klasse) <span class="badge" id="badge-block-6"></span></summary>
+  <div id="block-6"></div>
+</details>
+
+<details class="block">
+  <summary>7. Extremwertaufgaben (12. Klasse) <span class="badge" id="badge-block-7"></span></summary>
+  <div id="block-7"></div>
+</details>
+
+<details class="block">
+  <summary>8. Exponentialfunktionen &amp; Logarithmen (12. Klasse) <span class="badge" id="badge-block-8"></span></summary>
+  <div id="block-8"></div>
+</details>
+
+<details class="block">
+  <summary>9. Verknüpfung &amp; Verkettung von Funktionen (12. Klasse) <span class="badge" id="badge-block-9"></span></summary>
+  <div id="block-9"></div>
+</details>
+
+<details class="block">
+  <summary>10. Stammfunktion, Integral &amp; Flächen (12. Klasse) <span class="badge" id="badge-block-10"></span></summary>
+  <div id="block-10"></div>
+</details>
+
+<hr class="sep">
+<h2 class="section">Teil B: Stochastik</h2>
+
+<details class="block">
+  <summary>11. Zufallsexperiment und Ereignis (11. Klasse) <span class="badge" id="badge-block-11"></span></summary>
+  <div id="block-11"></div>
+</details>
+
+<details class="block">
+  <summary>12. Relative Häufigkeit und Wahrscheinlichkeit (11. Klasse) <span class="badge" id="badge-block-12"></span></summary>
+  <div id="block-12"></div>
+</details>
+
+<details class="block">
+  <summary>13. Grundlagen der Kombinatorik (11. Klasse) <span class="badge" id="badge-block-13"></span></summary>
+  <div id="block-13"></div>
+</details>
+
+<details class="block">
+  <summary>14. Bernoulli-Ketten (12. Klasse) <span class="badge" id="badge-block-14"></span></summary>
+  <div id="block-14"></div>
+</details>
+
+<details class="block">
+  <summary>15. Zufallsgrößen und Wahrscheinlichkeitsverteilungen (12. Klasse) <span class="badge" id="badge-block-15"></span></summary>
+  <div id="block-15"></div>
+</details>
+
+<details class="block">
+  <summary>16. Testen von Hypothesen (12. Klasse) <span class="badge" id="badge-block-16"></span></summary>
+  <div id="block-16"></div>
+</details>
+
+<script>
+// ============================================================
+// DATEN: Alle Kompetenzen aus der Kann-Liste mit Aufgaben
+// ============================================================
+const data = [
+
+// ============= BLOCK 1: Lineare Funktionen =============
+{ block: 1, title: "Punktprobe durchführen",
+  aufgabe: "Liegt der Punkt <span class=\"math\">P(3 | -4)</span> auf dem Graphen von <span class=\"math\">f(x) = -2x + 3</span>?",
+  hint: "Setze die x-Koordinate des Punktes in <span class=\"math\">f(x)</span> ein und vergleiche das Ergebnis mit der y-Koordinate.",
+  solution: "<span class=\"math\">f(3) = -2 · 3 + 3 = -6 + 3 = -3</span>. <br>Da <span class=\"math\">-3 ≠ -4</span>, liegt <span class=\"math\">P</span> <strong>nicht</strong> auf dem Graphen."
+},
+{ block: 1, title: "Gerade mit y-Achsenabschnitt und Steigungsdreieck zeichnen",
+  aufgabe: "Zeichne den Graphen von <span class=\"math\">f(x) = <span class=\"frac\"><span class=\"num\">2</span><span class=\"den\">3</span></span>x - 1</span> mit Hilfe des y-Achsenabschnitts und eines Steigungsdreiecks.",
+  hint: "y-Achsenabschnitt <span class=\"math\">t = -1</span> → Punkt <span class=\"math\">(0 | -1)</span>. Steigung <span class=\"math\">m = <span class=\"frac\"><span class=\"num\">2</span><span class=\"den\">3</span></span></span>: vom Startpunkt 3 nach rechts, 2 nach oben.",
+  solution: "Startpunkt <span class=\"math\">(0 | -1)</span>. Vom Startpunkt 3 Einheiten nach rechts und 2 Einheiten nach oben → zweiter Punkt <span class=\"math\">(3 | 1)</span>. Beide Punkte verbinden und Gerade verlängern."
+},
+{ block: 1, title: "Funktionsgleichung <span class=\"math\">f(x)=mx+t</span> bestimmen",
+  aufgabe: "Eine Gerade hat die Steigung <span class=\"math\">m = -<span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">2</span></span></span> und verläuft durch <span class=\"math\">P(4 | 1)</span>. Gib die Funktionsgleichung an.",
+  hint: "Setze <span class=\"math\">m</span>, <span class=\"math\">x</span> und <span class=\"math\">y</span> in <span class=\"math\">y = mx + t</span> ein und löse nach <span class=\"math\">t</span> auf.",
+  solution: "<span class=\"math\">1 = -<span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">2</span></span> · 4 + t = -2 + t ⇒ t = 3</span>. <br><span class=\"math\">f(x) = -<span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">2</span></span>x + 3</span>"
+},
+{ block: 1, title: "Funktionsgleichung in Punkt-Steigungs-Form",
+  aufgabe: "Eine Gerade verläuft durch <span class=\"math\">P(2 | -3)</span> mit Steigung <span class=\"math\">m = 4</span>. Gib die Funktionsgleichung in Punkt-Steigungs-Form und in der Form <span class=\"math\">f(x)=mx+t</span> an.",
+  hint: "Punkt-Steigungs-Form: <span class=\"math\">f(x) = m(x - x<sub>0</sub>) + y<sub>0</sub></span>.",
+  solution: "<span class=\"math\">f(x) = 4(x - 2) + (-3) = 4x - 8 - 3 = 4x - 11</span>"
+},
+{ block: 1, title: "Nullstelle und x-Achsenabschnittspunkt",
+  aufgabe: "Berechne die Nullstelle von <span class=\"math\">f(x) = -3x + 6</span> und gib den x-Achsenabschnittspunkt an.",
+  hint: "<span class=\"math\">f(x) = 0</span> setzen und nach <span class=\"math\">x</span> auflösen. Der x-Achsenabschnittspunkt hat die Form <span class=\"math\">(x<sub>N</sub> | 0)</span>.",
+  solution: "<span class=\"math\">-3x + 6 = 0 ⇒ x = 2</span>. <br>Nullstelle: <span class=\"math\">x = 2</span>, Punkt: <span class=\"math\">N(2 | 0)</span>."
+},
+{ block: 1, title: "Schnittpunkt mit der y-Achse",
+  aufgabe: "Bestimme den Schnittpunkt des Graphen von <span class=\"math\">f(x) = 5x - 7</span> mit der y-Achse.",
+  hint: "Setze <span class=\"math\">x = 0</span> in <span class=\"math\">f(x)</span> ein.",
+  solution: "<span class=\"math\">f(0) = -7</span> → Schnittpunkt mit der y-Achse: <span class=\"math\">S<sub>y</sub>(0 | -7)</span>."
+},
+{ block: 1, title: "Schnittpunkt zweier Geraden",
+  aufgabe: "Berechne den Schnittpunkt der Geraden <span class=\"math\">f(x) = 2x - 1</span> und <span class=\"math\">g(x) = -x + 5</span>.",
+  hint: "Gleichsetzen: <span class=\"math\">f(x) = g(x)</span>, nach <span class=\"math\">x</span> auflösen, dann y-Koordinate berechnen.",
+  solution: "<span class=\"math\">2x - 1 = -x + 5 ⇒ 3x = 6 ⇒ x = 2</span>. <br><span class=\"math\">y = f(2) = 2 · 2 - 1 = 3</span>. <br>Schnittpunkt: <span class=\"math\">S(2 | 3)</span>."
+},
+{ block: 1, title: "Geraden auf Parallelität / Orthogonalität prüfen",
+  aufgabe: "Sind die Geraden <span class=\"math\">f(x) = <span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">2</span></span>x + 2</span> und <span class=\"math\">g(x) = -2x + 1</span> parallel oder orthogonal?",
+  hint: "Parallel: <span class=\"math\">m<sub>1</sub> = m<sub>2</sub></span>. Orthogonal: <span class=\"math\">m<sub>1</sub> · m<sub>2</sub> = -1</span>.",
+  solution: "<span class=\"math\">m<sub>1</sub> · m<sub>2</sub> = <span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">2</span></span> · (-2) = -1</span>. <br>Die Geraden sind <strong>orthogonal</strong> zueinander."
+},
+{ block: 1, title: "Geradenscharen untersuchen (Büschelpunkt)",
+  aufgabe: "Gegeben ist die Geradenschar <span class=\"math\">f<sub>a</sub>(x) = ax + 2 - a</span> mit <span class=\"math\">a ∈ ℝ</span>. Bestimme den Büschelpunkt.",
+  hint: "Im Büschelpunkt schneiden sich alle Geraden – der Punkt ist also unabhängig von <span class=\"math\">a</span>. Sortiere die Gleichung nach <span class=\"math\">a</span>: <span class=\"math\">f<sub>a</sub>(x) = a(x-1) + 2</span>.",
+  solution: "<span class=\"math\">f<sub>a</sub>(x) = a(x - 1) + 2</span>. Damit der Wert nicht von <span class=\"math\">a</span> abhängt, muss <span class=\"math\">x - 1 = 0</span>, also <span class=\"math\">x = 1</span>. Dann <span class=\"math\">y = 2</span>. <br>Büschelpunkt: <span class=\"math\">B(1 | 2)</span>."
+},
+{ block: 1, title: "Definitions- und Wertemenge erklären",
+  aufgabe: "Erkläre die Begriffe Definitionsmenge <span class=\"math\">D</span> und Wertemenge <span class=\"math\">W</span> am Beispiel von <span class=\"math\">f(x) = 3x - 1</span>.",
+  hint: "<span class=\"math\">D</span>: alle x-Werte, die eingesetzt werden dürfen. <span class=\"math\">W</span>: alle y-Werte, die herauskommen können.",
+  solution: "<span class=\"math\">D = ℝ</span> (alle reellen Zahlen sind erlaubt). <span class=\"math\">W = ℝ</span> (jede reelle Zahl tritt als Funktionswert auf, da die Gerade nicht waagerecht ist)."
+},
+
+// ============= BLOCK 2: Quadratische Funktionen =============
+{ block: 2, title: "Verlauf des Graphen beschreiben und zeichnen",
+  aufgabe: "Beschreibe den Verlauf von <span class=\"math\">f(x) = -2(x - 1)<sup>2</sup> + 3</span> und gib den Scheitelpunkt an.",
+  hint: "Form <span class=\"math\">f(x) = a(x - x<sub>S</sub>)<sup>2</sup> + y<sub>S</sub></span> ist die Scheitelpunktform. <span class=\"math\">a < 0</span> → nach unten geöffnet.",
+  solution: "Scheitelpunkt: <span class=\"math\">S(1 | 3)</span>. Da <span class=\"math\">a = -2 < 0</span>, ist die Parabel <strong>nach unten geöffnet</strong> und gestreckt (steiler als Normalparabel)."
+},
+{ block: 2, title: "Allgemeine Form ↔ Scheitelpunktform",
+  aufgabe: "Wandle <span class=\"math\">f(x) = x<sup>2</sup> - 6x + 5</span> in die Scheitelpunktform um.",
+  hint: "Quadratische Ergänzung: <span class=\"math\">x<sup>2</sup> - 6x + 9 - 9 + 5 = (x - 3)<sup>2</sup> - 4</span>.",
+  solution: "<span class=\"math\">f(x) = (x - 3)<sup>2</sup> - 4</span>. Scheitelpunkt: <span class=\"math\">S(3 | -4)</span>."
+},
+{ block: 2, title: "Allgemeine Form ↔ Produktform",
+  aufgabe: "Wandle <span class=\"math\">f(x) = x<sup>2</sup> - x - 6</span> in die Produktform um.",
+  hint: "Berechne die Nullstellen <span class=\"math\">x<sub>1</sub></span>, <span class=\"math\">x<sub>2</sub></span>. Produktform: <span class=\"math\">f(x) = a(x - x<sub>1</sub>)(x - x<sub>2</sub>)</span>.",
+  solution: "<span class=\"math\">x<sup>2</sup> - x - 6 = 0</span> → <span class=\"math\">x<sub>1,2</sub> = <span class=\"frac\"><span class=\"num\">1 ± √(1 + 24)</span><span class=\"den\">2</span></span> = <span class=\"frac\"><span class=\"num\">1 ± 5</span><span class=\"den\">2</span></span></span>, also <span class=\"math\">x<sub>1</sub> = 3</span>, <span class=\"math\">x<sub>2</sub> = -2</span>. <br><span class=\"math\">f(x) = (x - 3)(x + 2)</span>."
+},
+{ block: 2, title: "Nullstellen mit Lösungsformel",
+  aufgabe: "Bestimme die Nullstellen von <span class=\"math\">f(x) = 0,5x<sup>2</sup> + x - 1,5</span>.",
+  hint: "Mitternachtsformel: <span class=\"math\">x<sub>1,2</sub> = <span class=\"frac\"><span class=\"num\">-b ± √(b<sup>2</sup> - 4ac)</span><span class=\"den\">2a</span></span></span>.",
+  solution: "<span class=\"math\">a = 0,5</span>, <span class=\"math\">b = 1</span>, <span class=\"math\">c = -1,5</span>. Diskriminante: <span class=\"math\">1 + 3 = 4</span>. <br><span class=\"math\">x<sub>1,2</sub> = <span class=\"frac\"><span class=\"num\">-1 ± 2</span><span class=\"den\">1</span></span></span>, also <span class=\"math\">x<sub>1</sub> = 1</span>, <span class=\"math\">x<sub>2</sub> = -3</span>."
+},
+{ block: 2, title: "Nullstellen durch Ausklammern",
+  aufgabe: "Bestimme die Nullstellen von <span class=\"math\">f(x) = 2x<sup>2</sup> - 4x</span>.",
+  hint: "Klammere <span class=\"math\">x</span> aus. Ein Produkt ist 0, wenn ein Faktor 0 ist.",
+  solution: "<span class=\"math\">2x(x - 2) = 0 ⇒ x<sub>1</sub> = 0</span> oder <span class=\"math\">x<sub>2</sub> = 2</span>."
+},
+{ block: 2, title: "Nullstellen durch Wurzelziehen",
+  aufgabe: "Bestimme die Nullstellen von <span class=\"math\">f(x) = x<sup>2</sup> - 9</span>.",
+  hint: "<span class=\"math\">x<sup>2</sup> = 9</span> und Wurzel ziehen – beide Vorzeichen beachten!",
+  solution: "<span class=\"math\">x<sup>2</sup> = 9 ⇒ x<sub>1,2</sub> = ± 3</span>."
+},
+{ block: 2, title: "Nullstellen aus Produktform ablesen",
+  aufgabe: "Lies die Nullstellen von <span class=\"math\">f(x) = -3(x + 1)(x - 4)</span> ab.",
+  hint: "Nullstellen sind die Werte, für die ein Faktor 0 wird.",
+  solution: "<span class=\"math\">x<sub>1</sub> = -1</span>, <span class=\"math\">x<sub>2</sub> = 4</span>."
+},
+{ block: 2, title: "Funktionsterm aus Eigenschaften aufstellen",
+  aufgabe: "Eine nach oben geöffnete Normalparabel hat Nullstellen bei <span class=\"math\">x<sub>1</sub> = -2</span> und <span class=\"math\">x<sub>2</sub> = 3</span>. Stelle den Funktionsterm in der allgemeinen Form auf.",
+  hint: "Produktform mit <span class=\"math\">a = 1</span>, dann ausmultiplizieren.",
+  solution: "<span class=\"math\">f(x) = (x + 2)(x - 3) = x<sup>2</sup> - x - 6</span>."
+},
+{ block: 2, title: "Gemeinsame Punkte zweier Funktionsgraphen",
+  aufgabe: "Bestimme die gemeinsamen Punkte von <span class=\"math\">f(x) = x<sup>2</sup></span> und <span class=\"math\">g(x) = x + 2</span>.",
+  hint: "Gleichsetzen, in Normalform bringen, Mitternachtsformel.",
+  solution: "<span class=\"math\">x<sup>2</sup> = x + 2 ⇒ x<sup>2</sup> - x - 2 = 0 ⇒ x<sub>1</sub> = 2</span>, <span class=\"math\">x<sub>2</sub> = -1</span>. <br>Punkte: <span class=\"math\">(2 | 4)</span> und <span class=\"math\">(-1 | 1)</span>."
+},
+{ block: 2, title: "Wertemenge einer quadratischen Funktion",
+  aufgabe: "Gib die Wertemenge von <span class=\"math\">f(x) = -(x - 2)<sup>2</sup> + 5</span> an.",
+  hint: "Höchster Wert ist die y-Koordinate des Scheitelpunktes (bei nach unten geöffneter Parabel).",
+  solution: "Scheitelpunkt <span class=\"math\">S(2 | 5)</span>, nach unten geöffnet → <span class=\"math\">W = ]-∞; 5]</span>."
+},
+{ block: 2, title: "Parabelscharen untersuchen",
+  aufgabe: "Untersuche die Parabelschar <span class=\"math\">f<sub>t</sub>(x) = x<sup>2</sup> - 2tx + t<sup>2</sup> - 1</span> in Abhängigkeit von <span class=\"math\">t</span> auf Anzahl und Lage der Nullstellen.",
+  hint: "Quadratische Ergänzung erkennen: <span class=\"math\">x<sup>2</sup> - 2tx + t<sup>2</sup> = (x - t)<sup>2</sup></span>.",
+  solution: "<span class=\"math\">f<sub>t</sub>(x) = (x - t)<sup>2</sup> - 1</span>. Nullstellen: <span class=\"math\">(x - t)<sup>2</sup> = 1 ⇒ x = t ± 1</span>. <br>Für jedes <span class=\"math\">t ∈ ℝ</span> gibt es <strong>zwei Nullstellen</strong> bei <span class=\"math\">x<sub>1</sub> = t-1</span> und <span class=\"math\">x<sub>2</sub> = t+1</span>."
+},
+{ block: 2, title: "Anwendungsaufgabe quadratisch",
+  aufgabe: "Ein Ball wird hochgeworfen. Seine Höhe in Metern nach <span class=\"math\">t</span> Sekunden beträgt <span class=\"math\">h(t) = -5t<sup>2</sup> + 10t + 1,25</span>. Wann erreicht der Ball seine maximale Höhe und wie hoch fliegt er?",
+  hint: "Scheitelpunkt der Parabel bestimmen (z.B. mit Scheitelpunktform oder Ableitung).",
+  solution: "<span class=\"math\">h(t) = -5(t - 1)<sup>2</sup> + 6,25</span>. <br>Maximale Höhe nach <span class=\"math\">t = 1 s</span>, Höhe <span class=\"math\">= 6,25 m</span>."
+},
+
+// ============= BLOCK 3: Ganzrationale Funktionen höheren Grades =============
+{ block: 3, title: "Globalverlauf beschreiben",
+  aufgabe: "Beschreibe den Globalverlauf von <span class=\"math\">f(x) = -2x<sup>3</sup> + 5x - 1</span> für <span class=\"math\">x → ±∞</span>.",
+  hint: "Höchste Potenz und Vorzeichen des Leitkoeffizienten betrachten. Ungerader Grad, <span class=\"math\">a < 0</span>.",
+  solution: "Für <span class=\"math\">x → -∞</span>: <span class=\"math\">f(x) → +∞</span>. <br>Für <span class=\"math\">x → +∞</span>: <span class=\"math\">f(x) → -∞</span>."
+},
+{ block: 3, title: "Symmetrie untersuchen",
+  aufgabe: "Untersuche <span class=\"math\">f(x) = x<sup>4</sup> - 3x<sup>2</sup> + 1</span> auf Achsen- bzw. Punktsymmetrie.",
+  hint: "Nur gerade Exponenten → Achsensymmetrie zur y-Achse. Nur ungerade Exponenten → Punktsymmetrie zum Ursprung.",
+  solution: "Es treten nur <strong>gerade Exponenten</strong> auf (4, 2 und 0) → der Graph ist <strong>achsensymmetrisch</strong> zur y-Achse."
+},
+{ block: 3, title: "Nullstellen durch Ausklammern",
+  aufgabe: "Bestimme die Nullstellen von <span class=\"math\">f(x) = x<sup>3</sup> - 4x<sup>2</sup> + 3x</span>.",
+  hint: "<span class=\"math\">x</span> ausklammern, dann den quadratischen Rest mit Mitternachtsformel.",
+  solution: "<span class=\"math\">x(x<sup>2</sup> - 4x + 3) = 0 ⇒ x<sub>1</sub> = 0</span> oder <span class=\"math\">x<sup>2</sup> - 4x + 3 = 0</span>. <br><span class=\"math\">x<sub>2,3</sub> = <span class=\"frac\"><span class=\"num\">4 ± 2</span><span class=\"den\">2</span></span></span>, also <span class=\"math\">x<sub>2</sub> = 1</span>, <span class=\"math\">x<sub>3</sub> = 3</span>."
+},
+{ block: 3, title: "Nullstellen durch Polynomdivision",
+  aufgabe: "Bestimme die Nullstellen von <span class=\"math\">f(x) = x<sup>3</sup> - 2x<sup>2</sup> - 5x + 6</span>. Eine Nullstelle ist <span class=\"math\">x<sub>1</sub> = 1</span>.",
+  hint: "Polynomdivision durch <span class=\"math\">(x - 1)</span>, dann den Rest mit Mitternachtsformel.",
+  solution: "<span class=\"math\">(x<sup>3</sup> - 2x<sup>2</sup> - 5x + 6) : (x - 1) = x<sup>2</sup> - x - 6</span>. <br><span class=\"math\">x<sup>2</sup> - x - 6 = 0 ⇒ x<sub>2,3</sub> = <span class=\"frac\"><span class=\"num\">1 ± 5</span><span class=\"den\">2</span></span></span>, also <span class=\"math\">x<sub>2</sub> = 3</span>, <span class=\"math\">x<sub>3</sub> = -2</span>. <br>Nullstellen: <span class=\"math\">-2;  1;  3</span>."
+},
+{ block: 3, title: "Nullstellen durch Substitution",
+  aufgabe: "Bestimme die Nullstellen von <span class=\"math\">f(x) = x<sup>4</sup> - 5x<sup>2</sup> + 4</span>.",
+  hint: "Substitution <span class=\"math\">u = x<sup>2</sup></span> → quadratische Gleichung in <span class=\"math\">u</span>.",
+  solution: "<span class=\"math\">u = x<sup>2</sup></span>: <span class=\"math\">u<sup>2</sup> - 5u + 4 = 0 ⇒ u<sub>1,2</sub> = <span class=\"frac\"><span class=\"num\">5 ± 3</span><span class=\"den\">2</span></span></span>, also <span class=\"math\">u<sub>1</sub> = 4</span>, <span class=\"math\">u<sub>2</sub> = 1</span>. <br>Rücksubstitution: <span class=\"math\">x<sup>2</sup> = 4 ⇒ x = ± 2</span> und <span class=\"math\">x<sup>2</sup> = 1 ⇒ x = ± 1</span>. <br>Vier Nullstellen: <span class=\"math\">± 1;  ± 2</span>."
+},
+{ block: 3, title: "Graphen skizzieren / Punkte erkennen",
+  aufgabe: "Skizziere grob den Graphen von <span class=\"math\">f(x) = (x + 2)x(x - 2)</span> und markiere die Nullstellen.",
+  hint: "Nullstellen direkt ablesen. Globalverhalten: ungerader Grad, positiver Leitkoeffizient.",
+  solution: "Nullstellen bei <span class=\"math\">-2;  0;  2</span> (alle einfach, also Vorzeichenwechsel). Globalverhalten: <span class=\"math\">x → -∞</span>: <span class=\"math\">f → -∞</span>; <span class=\"math\">x → +∞</span>: <span class=\"math\">f → +∞</span>. Graph durchläuft die x-Achse an allen drei Stellen."
+},
+{ block: 3, title: "Monotonie und Krümmung anhand einer Skizze",
+  aufgabe: "Aus einer Skizze ist ablesbar: Hochpunkt <span class=\"math\">H(-1 | 4)</span>, Tiefpunkt <span class=\"math\">T(2 | -3)</span>, Wendepunkt <span class=\"math\">W(0,5 | …)</span>. Gib Monotonie- und Krümmungsverhalten an.",
+  hint: "Zwischen Hoch- und Tiefpunkt → fallend. An Extrempunkten Vorzeichenwechsel der Steigung. Krümmung wechselt im Wendepunkt.",
+  solution: "Monotonie: <span class=\"math\">G<sub>f</sub></span> steigt für <span class=\"math\">x < -1</span>, fällt für <span class=\"math\">-1 < x < 2</span>, steigt für <span class=\"math\">x > 2</span>. <br>Krümmung: rechtsgekrümmt für <span class=\"math\">x < 0,5</span>, linksgekrümmt für <span class=\"math\">x > 0,5</span>."
+},
+{ block: 3, title: "Vorzeichen von <span class=\"math\">f(x)</span> – Ungleichungen",
+  aufgabe: "Aus der Skizze ist bekannt: <span class=\"math\">f</span> hat einfache Nullstellen bei <span class=\"math\">x = -1</span> und <span class=\"math\">x = 3</span>, ist nach oben geöffnet (positiver Leitkoeffizient, Grad 2). Für welche <span class=\"math\">x</span> gilt <span class=\"math\">f(x) < 0</span>?",
+  hint: "Bei einer nach oben geöffneten Parabel ist <span class=\"math\">f(x) < 0</span> <em>zwischen</em> den Nullstellen.",
+  solution: "<span class=\"math\">f(x) < 0</span> für <span class=\"math\">x ∈  ]-1; 3[</span>."
+},
+{ block: 3, title: "Wertemenge einer Funktion höheren Grades",
+  aufgabe: "Gib die Wertemenge von <span class=\"math\">f(x) = x<sup>4</sup> + 2</span> an.",
+  hint: "<span class=\"math\">x<sup>4</sup> ≥ 0</span> für alle <span class=\"math\">x</span>. Minimum bei <span class=\"math\">x = 0</span>.",
+  solution: "Minimum bei <span class=\"math\">x = 0</span> mit <span class=\"math\">f(0) = 2</span>. Da <span class=\"math\">f(x) → +∞</span> für <span class=\"math\">x → ±∞</span>: <br><span class=\"math\">W = [2;  +∞[</span>."
+},
+
+// ============= BLOCK 4: Differenzialrechnung ganzrational =============
+{ block: 4, title: "Mittlere Steigung (Differenzenquotient)",
+  aufgabe: "Berechne die mittlere Steigung von <span class=\"math\">f(x) = x<sup>2</sup> + 1</span> im Intervall <span class=\"math\">[1;  3]</span>.",
+  hint: "Differenzenquotient: <span class=\"math\"><span class=\"frac\"><span class=\"num\">f(b) - f(a)</span><span class=\"den\">b - a</span></span></span>.",
+  solution: "<span class=\"math\">f(1) = 2</span>, <span class=\"math\">f(3) = 10</span>. <br><span class=\"math\">m = <span class=\"frac\"><span class=\"num\">10 - 2</span><span class=\"den\">3 - 1</span></span> = <span class=\"frac\"><span class=\"num\">8</span><span class=\"den\">2</span></span> = 4</span>."
+},
+{ block: 4, title: "Sekanten- und Tangentensteigung erläutern",
+  aufgabe: "Erkläre den Unterschied zwischen Sekanten- und Tangentensteigung in maximal 2 Sätzen.",
+  hint: "Sekante schneidet den Graphen in 2 Punkten, Tangente berührt in 1 Punkt.",
+  solution: "Die <strong>Sekantensteigung</strong> ist die mittlere Steigung zwischen zwei Punkten des Graphen (Differenzenquotient). Die <strong>Tangentensteigung</strong> ist die momentane Steigung an genau einer Stelle und entspricht dem Wert der Ableitung dort: <span class=\"math\">f'(x<sub>0</sub>)</span>."
+},
+{ block: 4, title: "Tangentensteigung durch Ableitung",
+  aufgabe: "Welche Steigung hat die Tangente an <span class=\"math\">f(x) = x<sup>2</sup> - 4x</span> im Punkt <span class=\"math\">P(1 | f(1))</span>?",
+  hint: "<span class=\"math\">f'(x)</span> bilden und <span class=\"math\">x = 1</span> einsetzen.",
+  solution: "<span class=\"math\">f'(x) = 2x - 4</span>. <br><span class=\"math\">f'(1) = 2 - 4 = -2</span>. <br>Tangentensteigung: <span class=\"math\">m = -2</span>."
+},
+{ block: 4, title: "Erste drei Ableitungen bilden",
+  aufgabe: "Bestimme <span class=\"math\">f'(x)</span>, <span class=\"math\">f''(x)</span> und <span class=\"math\">f'''(x)</span> für <span class=\"math\">f(x) = x<sup>4</sup> - 2x<sup>3</sup> + 5x - 1</span>.",
+  hint: "Potenzregel: <span class=\"math\">[\bigl](x<sup>n</sup>[\bigr])' = n · x<sup>n-1</sup></span>. Konstanten verschwinden beim Ableiten.",
+  solution: "<span class=\"math\">f'(x) = 4x<sup>3</sup> - 6x<sup>2</sup> + 5</span> <br><span class=\"math\">f''(x) = 12x<sup>2</sup> - 12x</span> <br><span class=\"math\">f'''(x) = 24x - 12</span>"
+},
+{ block: 4, title: "Steigung an einer Stelle <span class=\"math\">x<sub>0</sub></span>",
+  aufgabe: "Bestimme die Steigung von <span class=\"math\">f(x) = <span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">3</span></span>x<sup>3</sup> - x</span> an der Stelle <span class=\"math\">x<sub>0</sub> = 2</span>.",
+  hint: "<span class=\"math\">f'(2)</span> berechnen.",
+  solution: "<span class=\"math\">f'(x) = x<sup>2</sup> - 1</span>. <br><span class=\"math\">m = f'(2) = 4 - 1 = 3</span>."
+},
+{ block: 4, title: "Monotonieverhalten bestimmen",
+  aufgabe: "Bestimme das Monotonieverhalten von <span class=\"math\">f(x) = x<sup>3</sup> - 3x</span>.",
+  hint: "<span class=\"math\">f'(x) = 0</span> setzen, Vorzeichen von <span class=\"math\">f'</span> in den Intervallen prüfen.",
+  solution: "<span class=\"math\">f'(x) = 3x<sup>2</sup> - 3 = 0 ⇒ x = ± 1</span>. <br>Vorzeichen von <span class=\"math\">f'</span>: für <span class=\"math\">x < -1</span> positiv (steigt), für <span class=\"math\">-1 < x < 1</span> negativ (fällt), für <span class=\"math\">x > 1</span> positiv (steigt)."
+},
+{ block: 4, title: "Extrempunkte bestimmen",
+  aufgabe: "Bestimme die Extrempunkte von <span class=\"math\">f(x) = x<sup>3</sup> - 3x<sup>2</sup></span>.",
+  hint: "<span class=\"math\">f'(x) = 0</span>, dann mit <span class=\"math\">f''</span> oder Vorzeichenwechsel von <span class=\"math\">f'</span> Art bestimmen, <span class=\"math\">f</span>-Werte berechnen.",
+  solution: "<span class=\"math\">f'(x) = 3x<sup>2</sup> - 6x = 3x(x - 2) = 0 ⇒ x<sub>1</sub> = 0</span>, <span class=\"math\">x<sub>2</sub> = 2</span>. <br><span class=\"math\">f''(x) = 6x - 6</span>. <br><span class=\"math\">f''(0) = -6 < 0</span> → Hochpunkt <span class=\"math\">H(0 | 0)</span>. <br><span class=\"math\">f''(2) = 6 > 0</span> → Tiefpunkt <span class=\"math\">T(2 | -4)</span>."
+},
+{ block: 4, title: "Krümmungsverhalten bestimmen",
+  aufgabe: "Bestimme das Krümmungsverhalten von <span class=\"math\">f(x) = <span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">3</span></span>x<sup>3</sup> - 2x<sup>2</sup> + 1</span>.",
+  hint: "Vorzeichen von <span class=\"math\">f''(x)</span> untersuchen.",
+  solution: "<span class=\"math\">f''(x) = 2x - 4</span>. <br><span class=\"math\">f''(x) < 0</span> für <span class=\"math\">x < 2</span> (rechtsgekrümmt), <span class=\"math\">f''(x) > 0</span> für <span class=\"math\">x > 2</span> (linksgekrümmt)."
+},
+{ block: 4, title: "Wendepunkte bestimmen",
+  aufgabe: "Bestimme den Wendepunkt von <span class=\"math\">f(x) = x<sup>3</sup> - 6x<sup>2</sup> + 9x</span>.",
+  hint: "<span class=\"math\">f''(x) = 0</span>, Vorzeichenwechsel von <span class=\"math\">f''</span> prüfen, <span class=\"math\">f</span>-Wert berechnen.",
+  solution: "<span class=\"math\">f''(x) = 6x - 12 = 0 ⇒ x = 2</span>. <br><span class=\"math\">f'''(x) = 6 ≠ 0</span> → Wendepunkt. <br><span class=\"math\">f(2) = 8 - 24 + 18 = 2</span>. <br>Wendepunkt: <span class=\"math\">W(2 | 2)</span>."
+},
+{ block: 4, title: "Terrassenpunkt erkennen",
+  aufgabe: "Untersuche, ob <span class=\"math\">f(x) = x<sup>3</sup></span> an der Stelle <span class=\"math\">x = 0</span> einen Terrassenpunkt besitzt.",
+  hint: "Terrassenpunkt = Wendepunkt mit waagerechter Tangente, also <span class=\"math\">f'(x<sub>0</sub>) = 0</span> <strong>und</strong> <span class=\"math\">f''(x<sub>0</sub>) = 0</span> (mit VZW von <span class=\"math\">f''</span>).",
+  solution: "<span class=\"math\">f'(x) = 3x<sup>2</sup></span>, <span class=\"math\">f'(0) = 0</span>. <br><span class=\"math\">f''(x) = 6x</span>, <span class=\"math\">f''(0) = 0</span> mit VZW. <br>An <span class=\"math\">x = 0</span> liegt ein <strong>Terrassenpunkt</strong> <span class=\"math\">TP(0 | 0)</span> vor."
+},
+{ block: 4, title: "Graph zeichnen mit allen Eigenschaften",
+  aufgabe: "Skizziere <span class=\"math\">f(x) = x<sup>3</sup> - 3x</span> unter Angabe von Nullstellen, Extrempunkten und Wendepunkt.",
+  hint: "<span class=\"math\">f</span>, <span class=\"math\">f'</span>, <span class=\"math\">f''</span> ansehen. Symmetrie nutzen!",
+  solution: "Nullstellen: <span class=\"math\">x(x<sup>2</sup> - 3) = 0 ⇒ 0;  ±√(3)</span>. <br><span class=\"math\">f'(x) = 3x<sup>2</sup> - 3 ⇒</span> Hochpunkt <span class=\"math\">H(-1 | 2)</span>, Tiefpunkt <span class=\"math\">T(1 | -2)</span>. <br><span class=\"math\">f''(x) = 6x ⇒</span> Wendepunkt <span class=\"math\">W(0 | 0)</span>. <br>Punktsymmetrisch zum Ursprung."
+},
+{ block: 4, title: "Tangentengleichung aufstellen",
+  aufgabe: "Bestimme die Gleichung der Tangente an <span class=\"math\">f(x) = x<sup>2</sup> - 2</span> im Punkt <span class=\"math\">P(2 | f(2))</span>.",
+  hint: "Tangentengleichung: <span class=\"math\">t(x) = f'(x<sub>0</sub>)(x - x<sub>0</sub>) + f(x<sub>0</sub>)</span>.",
+  solution: "<span class=\"math\">f(2) = 2</span>, <span class=\"math\">f'(x) = 2x</span>, <span class=\"math\">f'(2) = 4</span>. <br><span class=\"math\">t(x) = 4(x - 2) + 2 = 4x - 6</span>."
+},
+{ block: 4, title: "Anwendungsaufgabe Differenzialrechnung",
+  aufgabe: "Eine Firma hat die Kostenfunktion <span class=\"math\">K(x) = 0,1x<sup>2</sup> + 2x + 50</span> (in €, <span class=\"math\">x</span> in Stück). Berechne die Grenzkosten bei <span class=\"math\">x = 20</span> Stück.",
+  hint: "Grenzkosten = <span class=\"math\">K'(x)</span>.",
+  solution: "<span class=\"math\">K'(x) = 0,2x + 2</span>. <br><span class=\"math\">K'(20) = 4 + 2 = 6 </span>€/Stück."
+},
+
+// ============= BLOCK 5: Vertiefende Kurvendiskussion =============
+{ block: 5, title: "Lokale vs. globale Extrempunkte",
+  aufgabe: "<span class=\"math\">f(x) = x<sup>4</sup> - 4x<sup>2</sup></span> hat Extrempunkte bei <span class=\"math\">x = -√(2)</span> (Tiefpunkt), <span class=\"math\">x = 0</span> (Hochpunkt) und <span class=\"math\">x = √(2)</span> (Tiefpunkt) mit <span class=\"math\">f(±√(2)) = -4</span>, <span class=\"math\">f(0) = 0</span>. Welche sind global, welche lokal?",
+  hint: "Globalverhalten: <span class=\"math\">x<sup>4</sup> → +∞</span>. Hochpunkt <span class=\"math\">H(0 | 0)</span> ist nicht der höchste Punkt!",
+  solution: "Da <span class=\"math\">f(x) → +∞</span> für <span class=\"math\">x → ±∞</span>, gibt es kein globales Maximum. <br>Tiefpunkte <span class=\"math\">T<sub>1,2</sub>(±√(2) | -4)</span> sind <strong>globale</strong> Minima. <br>Hochpunkt <span class=\"math\">H(0 | 0)</span> ist nur ein <strong>lokales</strong> Maximum."
+},
+{ block: 5, title: "Randextrempunkte bei eingeschränkter Definitionsmenge",
+  aufgabe: "Gegeben <span class=\"math\">f(x) = x<sup>2</sup> - 4x + 1</span> mit <span class=\"math\">D = [0;  5]</span>. Bestimme alle Extrempunkte (inkl. Randextrema).",
+  hint: "Lokale Extrempunkte mit <span class=\"math\">f'(x) = 0</span>, dann Randwerte <span class=\"math\">f(0)</span> und <span class=\"math\">f(5)</span> berechnen und vergleichen.",
+  solution: "<span class=\"math\">f'(x) = 2x - 4 = 0 ⇒ x = 2</span>, <span class=\"math\">f(2) = -3 ⇒</span> Tiefpunkt <span class=\"math\">T(2 | -3)</span>. <br><span class=\"math\">f(0) = 1</span>, <span class=\"math\">f(5) = 6</span>. <br>Globaler Tiefpunkt: <span class=\"math\">T(2 | -3)</span>. Globaler Hochpunkt am Rand: <span class=\"math\">H<sub>R</sub>(5 | 6)</span>."
+},
+{ block: 5, title: "Stelle stärkster Zu-/Abnahme",
+  aufgabe: "An welcher Stelle nimmt <span class=\"math\">f(x) = x<sup>3</sup> - 6x<sup>2</sup></span> am stärksten zu bzw. ab? (Auf <span class=\"math\">ℝ</span> – evtl. nicht vorhanden!) Bestimme die Stelle stärkster Abnahme.",
+  hint: "Stärkste Abnahme = Tiefpunkt von <span class=\"math\">f'</span>. Also <span class=\"math\">f''(x) = 0</span> und <span class=\"math\">f'''(x) > 0</span>.",
+  solution: "<span class=\"math\">f'(x) = 3x<sup>2</sup> - 12x</span>, <span class=\"math\">f''(x) = 6x - 12 = 0 ⇒ x = 2</span>. <br><span class=\"math\">f'''(x) = 6 > 0 ⇒</span> Tiefpunkt von <span class=\"math\">f'</span> bei <span class=\"math\">x = 2</span>. <br>Stärkste Abnahme an der Stelle <span class=\"math\">x = 2</span>, mit <span class=\"math\">f'(2) = 12 - 24 = -12</span>."
+},
+{ block: 5, title: "Mittlere und momentane Änderungsrate",
+  aufgabe: "Berechne für <span class=\"math\">f(x) = x<sup>2</sup> + 1</span> die mittlere Änderungsrate auf <span class=\"math\">[1; 4]</span> und die momentane Änderungsrate an <span class=\"math\">x = 2</span>.",
+  hint: "Mittlere Änderungsrate = Differenzenquotient. Momentane Änderungsrate = <span class=\"math\">f'(x<sub>0</sub>)</span>.",
+  solution: "Mittlere ÄR: <span class=\"math\"><span class=\"frac\"><span class=\"num\">f(4) - f(1)</span><span class=\"den\">4 - 1</span></span> = <span class=\"frac\"><span class=\"num\">17 - 2</span><span class=\"den\">3</span></span> = 5</span>. <br>Momentane ÄR: <span class=\"math\">f'(x) = 2x</span>, <span class=\"math\">f'(2) = 4</span>."
+},
+{ block: 5, title: "Zusammenhang <span class=\"math\">f</span> ↔ <span class=\"math\">f'</span>",
+  aufgabe: "Welche Zusammenhänge bestehen zwischen <span class=\"math\">f</span> und <span class=\"math\">f'</span>? Nenne mindestens drei.",
+  hint: "Steigung, Extrempunkte, Wendepunkte – wie äußern sich diese in <span class=\"math\">f'</span>?",
+  solution: "(1) Wo <span class=\"math\">f</span> steigt, ist <span class=\"math\">f' > 0</span>; wo <span class=\"math\">f</span> fällt, ist <span class=\"math\">f' < 0</span>. <br>(2) Extrempunkte von <span class=\"math\">f</span> sind Nullstellen von <span class=\"math\">f'</span> (mit Vorzeichenwechsel). <br>(3) Wendepunkte von <span class=\"math\">f</span> sind Extrempunkte von <span class=\"math\">f'</span>. <br>(4) Tangentensteigung von <span class=\"math\">f</span> an <span class=\"math\">x<sub>0</sub></span> = <span class=\"math\">f'(x<sub>0</sub>)</span>."
+},
+{ block: 5, title: "Graph der Ableitungsfunktion skizzieren",
+  aufgabe: "Der Graph von <span class=\"math\">f</span> hat einen Hochpunkt bei <span class=\"math\">x = -1</span>, einen Tiefpunkt bei <span class=\"math\">x = 2</span> und einen Wendepunkt bei <span class=\"math\">x = 0,5</span>. Skizziere grob den Graphen von <span class=\"math\">f'</span>.",
+  hint: "Nullstellen von <span class=\"math\">f'</span> an den Extremstellen von <span class=\"math\">f</span>. Vorzeichen von <span class=\"math\">f'</span> aus Monotonie. Extremstelle von <span class=\"math\">f'</span> am Wendepunkt von <span class=\"math\">f</span>.",
+  solution: "<span class=\"math\">f'</span> hat Nullstellen bei <span class=\"math\">x = -1</span> (VZW von <span class=\"math\">+</span> nach <span class=\"math\">-</span>) und <span class=\"math\">x = 2</span> (VZW von <span class=\"math\">-</span> nach <span class=\"math\">+</span>). <br><span class=\"math\">f'</span> hat einen Tiefpunkt bei <span class=\"math\">x = 0,5</span> (am Wendepunkt von <span class=\"math\">f</span>). <br><span class=\"math\">f'</span>-Graph: oberhalb x-Achse für <span class=\"math\">x<-1</span> und <span class=\"math\">x>2</span>, unterhalb für <span class=\"math\">-1<x<2</span>."
+},
+{ block: 5, title: "y-Koordinate von <span class=\"math\">f'</span>-Extrempunkten via Wendetangente",
+  aufgabe: "<span class=\"math\">f</span> hat einen Wendepunkt <span class=\"math\">W(2 | 1)</span> und die Wendetangente hat die Steigung <span class=\"math\">-3</span>. Welche Koordinaten hat der zugehörige Extrempunkt von <span class=\"math\">f'</span>?",
+  hint: "An der Wendestelle ist <span class=\"math\">f'</span> extremal. y-Koordinate des Extrempunktes von <span class=\"math\">f'</span> = Steigung der Wendetangente von <span class=\"math\">f</span>.",
+  solution: "Extrempunkt von <span class=\"math\">f'</span> bei <span class=\"math\">x = 2</span> (Wendestelle von <span class=\"math\">f</span>), y-Koordinate = Steigung der Wendetangente = <span class=\"math\">-3</span>. <br>Extrempunkt: <span class=\"math\">(2 | -3)</span>."
+},
+{ block: 5, title: "Anwendungsaufgabe Kurvendiskussion",
+  aufgabe: "Die Anzahl der Besucher in einem Park (in Tausend) zwischen 9 und 17 Uhr wird modelliert durch <span class=\"math\">b(t) = -0,1t<sup>3</sup> + 1,5t<sup>2</sup> - 4,5t + 5</span> (mit <span class=\"math\">t</span> Stunden nach 9 Uhr, <span class=\"math\">t ∈ [0; 8]</span>). Wann nimmt die Besucherzahl am stärksten zu?",
+  hint: "Stärkste Zunahme = Hochpunkt von <span class=\"math\">b'</span>. Also <span class=\"math\">b''(t) = 0</span>.",
+  solution: "<span class=\"math\">b'(t) = -0,3t<sup>2</sup> + 3t - 4,5</span>, <span class=\"math\">b''(t) = -0,6t + 3 = 0 ⇒ t = 5</span>. <br><span class=\"math\">b'''(t) = -0,6 < 0</span> → Hochpunkt von <span class=\"math\">b'</span>. <br>Stärkste Zunahme um 14 Uhr (<span class=\"math\">t=5</span> entspricht 9+5)."
+},
+
+// ============= BLOCK 6: Steckbriefaufgaben =============
+{ block: 6, title: "Allgemeine Funktionsgleichung und Ableitungen",
+  aufgabe: "Schreibe für eine ganzrationale Funktion 3. Grades die allgemeine Funktionsgleichung sowie <span class=\"math\">f'</span> und <span class=\"math\">f''</span> auf.",
+  hint: "<span class=\"math\">f(x) = ax<sup>3</sup> + bx<sup>2</sup> + cx + d</span>. Ableitungen mit Potenzregel.",
+  solution: "<span class=\"math\">f(x) = ax<sup>3</sup> + bx<sup>2</sup> + cx + d</span> <br><span class=\"math\">f'(x) = 3ax<sup>2</sup> + 2bx + c</span> <br><span class=\"math\">f''(x) = 6ax + 2b</span>"
+},
+{ block: 6, title: "Symmetrie ausnutzen",
+  aufgabe: "Eine ganzrationale Funktion 4. Grades ist achsensymmetrisch zur y-Achse. Wie vereinfacht sich der Ansatz?",
+  hint: "Achsensymmetrie zur y-Achse → nur gerade Exponenten.",
+  solution: "Ansatz: <span class=\"math\">f(x) = ax<sup>4</sup> + bx<sup>2</sup> + c</span> (kein <span class=\"math\">x<sup>3</sup></span>, kein <span class=\"math\">x<sup>1</sup></span>). Statt 5 Unbekannten nur noch 3."
+},
+{ block: 6, title: "Bedingungen aus Punktangaben übersetzen",
+  aufgabe: "Übersetze in Bedingungsgleichungen: Der Graph von <span class=\"math\">f</span> verläuft durch <span class=\"math\">P(1 | 4)</span> und schneidet die y-Achse bei <span class=\"math\">-2</span>.",
+  hint: "Punkt <span class=\"math\">(x<sub>0</sub> | y<sub>0</sub>)</span> → <span class=\"math\">f(x<sub>0</sub>) = y<sub>0</sub></span>. y-Achsenabschnitt → <span class=\"math\">f(0) = …</span>.",
+  solution: "(I) <span class=\"math\">f(1) = 4</span> <br>(II) <span class=\"math\">f(0) = -2</span>"
+},
+{ block: 6, title: "Bedingungen aus Steigungs-/Extremstellen-Angaben",
+  aufgabe: "Übersetze in Bedingungen: <span class=\"math\">f</span> hat in <span class=\"math\">H(2 | 5)</span> einen Hochpunkt und in <span class=\"math\">W(0 | 1)</span> einen Wendepunkt.",
+  hint: "Hochpunkt: <span class=\"math\">f(x<sub>H</sub>) = y<sub>H</sub></span> und <span class=\"math\">f'(x<sub>H</sub>) = 0</span>. Wendepunkt: <span class=\"math\">f(x<sub>W</sub>) = y<sub>W</sub></span> und <span class=\"math\">f''(x<sub>W</sub>) = 0</span>.",
+  solution: "(I) <span class=\"math\">f(2) = 5</span>, (II) <span class=\"math\">f'(2) = 0</span> (Hochpunkt) <br>(III) <span class=\"math\">f(0) = 1</span>, (IV) <span class=\"math\">f''(0) = 0</span> (Wendepunkt)"
+},
+{ block: 6, title: "Lineares Gleichungssystem mit 3 Unbekannten (Gauß)",
+  aufgabe: "Löse das LGS mit dem Gauß-Algorithmus: <span class=\"math\">[\begin]aligneda + b + c &= 6 <br>\ 4a + 2b + c &= 11 <br>\ 9a + 3b + c &= 18[\end]aligned</span>",
+  hint: "Erste Zeile von zweiter und dritter abziehen, dann eine weitere Elimination.",
+  solution: "(II)-(I): <span class=\"math\">3a + b = 5</span>. (III)-(I): <span class=\"math\">8a + 2b = 12 ⇔ 4a + b = 6</span>. <br>Differenz: <span class=\"math\">a = 1 ⇒ b = 2 ⇒ c = 3</span>."
+},
+{ block: 6, title: "LGS mit 2 Unbekannten (Einsetzungsverfahren)",
+  aufgabe: "Eine quadratische Funktion <span class=\"math\">f(x) = ax<sup>2</sup> + b</span> verläuft durch <span class=\"math\">(1 | 5)</span> und <span class=\"math\">(2 | 11)</span>. Bestimme <span class=\"math\">f</span>.",
+  hint: "Beide Punkte einsetzen, kleines LGS.",
+  solution: "(I) <span class=\"math\">a + b = 5</span>, (II) <span class=\"math\">4a + b = 11</span>. <br>(II)-(I): <span class=\"math\">3a = 6 ⇒ a = 2</span>, <span class=\"math\">b = 3</span>. <br><span class=\"math\">f(x) = 2x<sup>2</sup> + 3</span>."
+},
+{ block: 6, title: "Rückwärts: Funktion aus <span class=\"math\">f''</span> bestimmen",
+  aufgabe: "Gegeben: <span class=\"math\">f''(x) = 6x - 4</span> und der Wendepunkt <span class=\"math\">W(0 | 1)</span> liegt mit Steigung <span class=\"math\">-1</span> auf der Wendetangente. Bestimme <span class=\"math\">f(x)</span>.",
+  hint: "Aufintegrieren (Stammfunktion bilden), Konstanten mit Bedingungen bestimmen.",
+  solution: "<span class=\"math\">f'(x) = 3x<sup>2</sup> - 4x + c<sub>1</sub></span>, <span class=\"math\">f'(0) = -1 ⇒ c<sub>1</sub> = -1</span>. <br><span class=\"math\">f(x) = x<sup>3</sup> - 2x<sup>2</sup> - x + c<sub>2</sub></span>, <span class=\"math\">f(0) = 1 ⇒ c<sub>2</sub> = 1</span>. <br><span class=\"math\">f(x) = x<sup>3</sup> - 2x<sup>2</sup> - x + 1</span>."
+},
+{ block: 6, title: "Anwendungsaufgabe Steckbrief",
+  aufgabe: "Modelliere eine Brücke als nach unten geöffnete Parabel: Sie ist 20 m breit (Auflagepunkte auf der x-Achse symmetrisch zur y-Achse) und 5 m hoch in der Mitte. Stelle die Funktionsgleichung auf.",
+  hint: "Symmetrie zur y-Achse → <span class=\"math\">f(x) = ax<sup>2</sup> + b</span>. Scheitelpunkt = Maximum, Auflagepunkte = Nullstellen.",
+  solution: "Auflagepunkte <span class=\"math\">(± 10 | 0)</span>, Scheitel <span class=\"math\">(0 | 5)</span>. <br><span class=\"math\">b = 5</span>. <span class=\"math\">f(10) = 100a + 5 = 0 ⇒ a = -0,05</span>. <br><span class=\"math\">f(x) = -0,05x<sup>2</sup> + 5</span>."
+},
+
+// ============= BLOCK 7: Extremwertaufgaben =============
+{ block: 7, title: "Skizze mit Bezeichnungen anfertigen",
+  aufgabe: "Aus einem rechteckigen Karton soll eine offene Schachtel gefaltet werden, indem an den vier Ecken Quadrate der Seitenlänge <span class=\"math\">x</span> ausgeschnitten werden. Karton: 30 cm × 20 cm. Zeichne eine beschriftete Skizze.",
+  hint: "Karton zeichnen, an Ecken Quadrate <span class=\"math\">x × x</span>, hochgeklappte Seiten andeuten. Höhe = <span class=\"math\">x</span>.",
+  solution: "Skizze: Rechteck 30 × 20 mit eingezeichneten Quadraten <span class=\"math\">x · x</span> an den vier Ecken. Boden der Schachtel: <span class=\"math\">(30-2x) × (20-2x)</span>, Höhe: <span class=\"math\">x</span>."
+},
+{ block: 7, title: "Haupt- und Nebenbedingung formulieren",
+  aufgabe: "Ein Rechteck soll eine Fläche von <span class=\"math\">36 m<sup>2</sup></span> haben. Der Umfang <span class=\"math\">u</span> soll minimal sein. Stelle Haupt- und Nebenbedingung auf.",
+  hint: "Was wird optimiert? Was ist die Einschränkung?",
+  solution: "Hauptbedingung: <span class=\"math\">U(a,b) = 2a + 2b</span> (zu minimieren). <br>Nebenbedingung: <span class=\"math\">a · b = 36</span>."
+},
+{ block: 7, title: "Zielfunktion herleiten",
+  aufgabe: "Aufgabe wie zuvor. Bestimme die Zielfunktion <span class=\"math\">U(a)</span> in einer Variablen.",
+  hint: "Nebenbedingung nach <span class=\"math\">b</span> auflösen und in Hauptbedingung einsetzen.",
+  solution: "<span class=\"math\">b = <span class=\"frac\"><span class=\"num\">36</span><span class=\"den\">a</span></span></span> in <span class=\"math\">U</span> einsetzen: <br><span class=\"math\">U(a) = 2a + 2 · <span class=\"frac\"><span class=\"num\">36</span><span class=\"den\">a</span></span> = 2a + <span class=\"frac\"><span class=\"num\">72</span><span class=\"den\">a</span></span></span>."
+},
+{ block: 7, title: "Sinnvolle Definitionsmenge",
+  aufgabe: "Gib die sinnvolle Definitionsmenge für <span class=\"math\">U(a) = 2a + <span class=\"frac\"><span class=\"num\">72</span><span class=\"den\">a</span></span></span> im obigen Kontext (Rechteckseite) an.",
+  hint: "Welche <span class=\"math\">a</span>-Werte sind im Kontext überhaupt möglich?",
+  solution: "<span class=\"math\">a</span> ist eine Seitenlänge → <span class=\"math\">a > 0</span>. Also <span class=\"math\">D = ]0;  +∞[</span> bzw. <span class=\"math\">ℝ<sup>+</sup></span>."
+},
+{ block: 7, title: "Extremstellen der Zielfunktion finden",
+  aufgabe: "Bestimme das absolute Minimum von <span class=\"math\">U(a) = 2a + <span class=\"frac\"><span class=\"num\">72</span><span class=\"den\">a</span></span></span> auf <span class=\"math\">D = ]0; ∞[</span>.",
+  hint: "<span class=\"math\">U'(a) = 0</span> setzen, <span class=\"math\">U''</span> prüfen, Randverhalten überlegen (<span class=\"math\">a → 0<sup>+</sup></span> und <span class=\"math\">a → ∞</span> → <span class=\"math\">U → ∞</span>).",
+  solution: "<span class=\"math\">U'(a) = 2 - <span class=\"frac\"><span class=\"num\">72</span><span class=\"den\">a<sup>2</sup></span></span> = 0 ⇒ a<sup>2</sup> = 36 ⇒ a = 6</span> (nur positive Lösung). <br><span class=\"math\">U''(a) = <span class=\"frac\"><span class=\"num\">144</span><span class=\"den\">a<sup>3</sup></span></span> > 0</span> → Minimum. <br>Minimaler Umfang: <span class=\"math\">U(6) = 12 + 12 = 24 </span>m."
+},
+{ block: 7, title: "Weitere Größen mit Nebenbedingung berechnen",
+  aufgabe: "Berechne im obigen Beispiel die Seitenlänge <span class=\"math\">b</span> bei <span class=\"math\">a = 6</span>.",
+  hint: "Nebenbedingung verwenden.",
+  solution: "<span class=\"math\">b = <span class=\"frac\"><span class=\"num\">36</span><span class=\"den\">6</span></span> = 6 </span>m. <br>Es entsteht ein <strong>Quadrat</strong> mit Seitenlänge 6 m."
+},
+{ block: 7, title: "Komplette Extremwertaufgabe",
+  aufgabe: "Aus einem Stück Draht der Länge 40 cm soll ein Rechteck mit größtem Flächeninhalt geformt werden. Welche Seitenlängen muss es haben?",
+  hint: "Hauptbedingung: <span class=\"math\">A = a · b</span> (maximal). Nebenbedingung: Umfang <span class=\"math\">2a + 2b = 40</span>.",
+  solution: "<span class=\"math\">b = 20 - a</span>. <span class=\"math\">A(a) = a(20 - a) = 20a - a<sup>2</sup></span>. <br><span class=\"math\">A'(a) = 20 - 2a = 0 ⇒ a = 10</span>, <span class=\"math\">A''(a) = -2 < 0</span> → Maximum. <br><span class=\"math\">b = 10</span>. Quadrat mit <span class=\"math\">10 × 10 </span>cm und <span class=\"math\">A = 100 </span>cm²."
+},
+
+// ============= BLOCK 8: Exponentialfunktionen & Logarithmen =============
+{ block: 8, title: "Wachstums-/Zerfallsprozess mit <span class=\"math\">f(x) = a · b<sup>x</sup></span>",
+  aufgabe: "Eine Bakterienkultur startet mit 200 Bakterien und verdoppelt sich pro Stunde. Stelle die Funktionsgleichung <span class=\"math\">N(t)</span> in der Form <span class=\"math\">a · b<sup>t</sup></span> auf.",
+  hint: "<span class=\"math\">a</span> = Anfangswert, <span class=\"math\">b</span> = Wachstumsfaktor.",
+  solution: "<span class=\"math\">a = 200</span>, <span class=\"math\">b = 2</span>. <br><span class=\"math\">N(t) = 200 · 2<sup>t</sup></span> (mit <span class=\"math\">t</span> in Stunden)."
+},
+{ block: 8, title: "Einfluss der Parameter bei <span class=\"math\">f(x) = a· e<sup>c(x-d)</sup> + y<sub>0</sub></span>",
+  aufgabe: "Gegeben <span class=\"math\">f(x) = 3 · e<sup>0,5(x - 2)</sup> + 1</span>. Beschreibe Bedeutung der Parameter <span class=\"math\">a</span>, <span class=\"math\">c</span>, <span class=\"math\">d</span>, <span class=\"math\">y<sub>0</sub></span> in Worten.",
+  hint: "<span class=\"math\">a</span>: Streckung in y-Richtung, Vorzeichen → Spiegelung. <span class=\"math\">c</span>: Wachstum/Zerfall, Steilheit. <span class=\"math\">d</span>: Verschiebung in x-Richtung. <span class=\"math\">y<sub>0</sub></span>: Verschiebung in y-Richtung (Asymptote).",
+  solution: "<span class=\"math\">a = 3</span>: Streckung in y-Richtung um Faktor 3. <br><span class=\"math\">c = 0,5 > 0</span>: <strong>Wachstum</strong> (steigend). <br><span class=\"math\">d = 2</span>: Verschiebung um 2 nach rechts. <br><span class=\"math\">y<sub>0</sub> = 1</span>: Verschiebung um 1 nach oben → waagerechte Asymptote <span class=\"math\">y = 1</span>."
+},
+{ block: 8, title: "Besonderheit der natürlichen e-Funktion",
+  aufgabe: "Was ist das Besondere an der Ableitung der Funktion <span class=\"math\">f(x) = e<sup>x</sup></span>?",
+  hint: "Vergleiche <span class=\"math\">f(x)</span> und <span class=\"math\">f'(x)</span>.",
+  solution: "<span class=\"math\">f'(x) = e<sup>x</sup> = f(x)</span>. Die natürliche Exponentialfunktion ist ihre eigene Ableitung. An jeder Stelle entspricht die Tangentensteigung dem Funktionswert."
+},
+{ block: 8, title: "Logarithmusgesetze anwenden",
+  aufgabe: "Vereinfache: <span class=\"math\">ln(8) - ln(2) + ln(e<sup>3</sup>)</span>.",
+  hint: "Logarithmusgesetze: <span class=\"math\">ln a - ln b = ln<span class=\"frac\"><span class=\"num\">a</span><span class=\"den\">b</span></span></span>, <span class=\"math\">ln(e<sup>x</sup>) = x</span>.",
+  solution: "<span class=\"math\">ln(8) - ln(2) = ln(4)</span>. <br><span class=\"math\">ln(e<sup>3</sup>) = 3</span>. <br>Ergebnis: <span class=\"math\">ln(4) + 3 ≈ 1,386 + 3 = 4,386</span>."
+},
+{ block: 8, title: "Exponentialfunktion zur Basis <span class=\"math\">e</span> umschreiben",
+  aufgabe: "Schreibe <span class=\"math\">f(x) = 5 · 3<sup>x</sup></span> in der Form <span class=\"math\">a · e<sup>cx</sup></span>.",
+  hint: "<span class=\"math\">3<sup>x</sup> = e<sup>x · ln 3</sup></span>.",
+  solution: "<span class=\"math\">f(x) = 5 · 3<sup>x</sup> = 5 · e<sup>x · ln 3</sup> ≈ 5 · e<sup>1,0986  x</sup></span>."
+},
+{ block: 8, title: "Exponentialgleichung lösen",
+  aufgabe: "Löse die Gleichung <span class=\"math\">4 · e<sup>0,5x</sup> = 20</span>.",
+  hint: "Erst durch 4 teilen, dann beidseitig <span class=\"math\">ln</span> anwenden.",
+  solution: "<span class=\"math\">e<sup>0,5x</sup> = 5 ⇒ 0,5x = ln 5 ⇒ x = 2 ln 5 ≈ 3,22</span>."
+},
+{ block: 8, title: "Achsenschnittpunkte einer e-Funktion",
+  aufgabe: "Bestimme die Schnittpunkte des Graphen von <span class=\"math\">f(x) = e<sup>x</sup> - 2</span> mit den Achsen.",
+  hint: "x-Achse: <span class=\"math\">f(x)=0</span>. y-Achse: <span class=\"math\">f(0)</span>.",
+  solution: "y-Achse: <span class=\"math\">f(0) = e<sup>0</sup> - 2 = -1 ⇒ S<sub>y</sub>(0 | -1)</span>. <br>x-Achse: <span class=\"math\">e<sup>x</sup> = 2 ⇒ x = ln 2 ≈ 0,69 ⇒ S<sub>x</sub>(ln 2 | 0)</span>."
+},
+{ block: 8, title: "Schnittpunkte zweier Exponentialfunktionen",
+  aufgabe: "Bestimme die Schnittpunkte von <span class=\"math\">f(x) = e<sup>2x</sup></span> und <span class=\"math\">g(x) = e<sup>x+1</sup></span>.",
+  hint: "Gleichsetzen, Eindeutigkeit der e-Funktion: <span class=\"math\">e<sup>a</sup> = e<sup>b</sup> ⇔ a = b</span>.",
+  solution: "<span class=\"math\">e<sup>2x</sup> = e<sup>x+1</sup> ⇒ 2x = x + 1 ⇒ x = 1</span>. <br><span class=\"math\">y = e<sup>2</sup> ≈ 7,39</span>. <br>Schnittpunkt: <span class=\"math\">(1 | e<sup>2</sup>)</span>."
+},
+{ block: 8, title: "Wachstums-/Zerfallsprozess modellieren",
+  aufgabe: "Eine radioaktive Substanz hat eine Anfangsmasse von 80 g und zerfällt pro Tag um 5 %. Stelle eine Funktion <span class=\"math\">m(t)</span> in der Form <span class=\"math\">a · e<sup>ct</sup></span> auf.",
+  hint: "Zerfallsfaktor pro Tag: <span class=\"math\">b = 0,95</span>. Mit <span class=\"math\">b = e<sup>c</sup></span> ist <span class=\"math\">c = ln(0,95)</span>.",
+  solution: "<span class=\"math\">c = ln(0,95) ≈ -0,0513</span>. <br><span class=\"math\">m(t) = 80 · e<sup>-0,0513  t</sup></span> (in Gramm, <span class=\"math\">t</span> in Tagen)."
+},
+{ block: 8, title: "Halbwerts- bzw. Verdopplungszeit",
+  aufgabe: "Bestimme die Halbwertszeit von <span class=\"math\">m(t) = 100 · e<sup>-0,2t</sup></span>.",
+  hint: "<span class=\"math\">m(T<sub>H</sub>) = <span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">2</span></span> · 100</span>, also <span class=\"math\">e<sup>-0,2 T<sub>H</sub></sup> = 0,5</span>.",
+  solution: "<span class=\"math\">e<sup>-0,2 T<sub>H</sub></sup> = 0,5 ⇒ -0,2 T<sub>H</sub> = ln(0,5) ⇒ T<sub>H</sub> = <span class=\"frac\"><span class=\"num\">-ln 2</span><span class=\"den\">-0,2</span></span> = 5 ln 2 ≈ 3,47</span>."
+},
+{ block: 8, title: "Anwendungsaufgabe Exponentialfunktion",
+  aufgabe: "Eine Tasse Kaffee hat 90 °C, die Raumtemperatur 20 °C. Die Temperatur fällt nach <span class=\"math\">f(t) = 20 + 70 · e<sup>-0,1t</sup></span> (in °C, <span class=\"math\">t</span> in Minuten). Wann hat der Kaffee 50 °C?",
+  hint: "<span class=\"math\">f(t) = 50</span> einsetzen, <span class=\"math\">ln</span> anwenden.",
+  solution: "<span class=\"math\">20 + 70 · e<sup>-0,1t</sup> = 50 ⇒ e<sup>-0,1t</sup> = <span class=\"frac\"><span class=\"num\">30</span><span class=\"den\">70</span></span> = <span class=\"frac\"><span class=\"num\">3</span><span class=\"den\">7</span></span></span>. <br><span class=\"math\">t = <span class=\"frac\"><span class=\"num\">ln(3/7)</span><span class=\"den\">-0,1</span></span> ≈ 8,47 </span>min."
+},
+
+// ============= BLOCK 9: Verknüpfung & Verkettung =============
+{ block: 9, title: "Verknüpfte Funktionen erkennen",
+  aufgabe: "Welche der folgenden Funktionen ist ein Produkt, welche eine Verkettung? <br>(a) <span class=\"math\">f(x) = x<sup>2</sup> · e<sup>x</sup></span> &nbsp; (b) <span class=\"math\">g(x) = e<sup>x<sup>2</sup></sup></span>",
+  hint: "Produkt: zwei Funktionen werden multipliziert. Verkettung: eine Funktion sitzt <em>in</em> der anderen.",
+  solution: "(a) <span class=\"math\">f</span> ist ein <strong>Produkt</strong> aus <span class=\"math\">u(x) = x<sup>2</sup></span> und <span class=\"math\">v(x) = e<sup>x</sup></span>. <br>(b) <span class=\"math\">g</span> ist eine <strong>Verkettung</strong>: äußere Funktion <span class=\"math\">e<sup>(…)</sup></span>, innere Funktion <span class=\"math\">x<sup>2</sup></span>."
+},
+{ block: 9, title: "Produktregel anwenden",
+  aufgabe: "Leite ab: <span class=\"math\">f(x) = x · e<sup>x</sup></span>.",
+  hint: "Produktregel: <span class=\"math\">(uv)' = u'v + uv'</span>.",
+  solution: "<span class=\"math\">u(x) = x ⇒ u'(x) = 1</span>, <span class=\"math\">v(x) = e<sup>x</sup> ⇒ v'(x) = e<sup>x</sup></span>. <br><span class=\"math\">f'(x) = 1 · e<sup>x</sup> + x · e<sup>x</sup> = e<sup>x</sup>(1 + x)</span>."
+},
+{ block: 9, title: "Nullstellen von Produktfunktionen mit e-Funktion",
+  aufgabe: "Bestimme die Nullstellen von <span class=\"math\">f(x) = (x - 3) · e<sup>x</sup></span>.",
+  hint: "<span class=\"math\">e<sup>x</sup> ≠ 0</span> für alle <span class=\"math\">x</span> → nur der andere Faktor liefert Nullstellen.",
+  solution: "<span class=\"math\">e<sup>x</sup> > 0</span> für alle <span class=\"math\">x</span> → <span class=\"math\">f(x) = 0 ⇔ x - 3 = 0 ⇔ x = 3</span>. <br>Einzige Nullstelle: <span class=\"math\">x = 3</span>."
+},
+{ block: 9, title: "Innere und äußere Funktion",
+  aufgabe: "Bestimme bei <span class=\"math\">f(x) = (3x - 5)<sup>4</sup></span> innere und äußere Funktion.",
+  hint: "Innere: was steht im Inneren? Äußere: was passiert damit?",
+  solution: "Innere Funktion: <span class=\"math\">u(x) = 3x - 5</span>. <br>Äußere Funktion: <span class=\"math\">v(u) = u<sup>4</sup></span>."
+},
+{ block: 9, title: "Kettenregel anwenden",
+  aufgabe: "Leite ab: <span class=\"math\">f(x) = e<sup>2x - 1</sup></span>.",
+  hint: "Kettenregel: äußere Ableitung mal innere Ableitung. <span class=\"math\">(e<sup>u</sup>)' = e<sup>u</sup> · u'</span>.",
+  solution: "<span class=\"math\">u(x) = 2x - 1</span>, <span class=\"math\">u'(x) = 2</span>. <br><span class=\"math\">f'(x) = e<sup>2x - 1</sup> · 2 = 2 e<sup>2x - 1</sup></span>."
+},
+{ block: 9, title: "Ketten- und Produktregel kombiniert",
+  aufgabe: "Leite ab: <span class=\"math\">f(x) = x<sup>2</sup> · e<sup>-x</sup></span>.",
+  hint: "Erst Produktregel ansetzen, <span class=\"math\">e<sup>-x</sup></span> mit Kettenregel ableiten: <span class=\"math\">(e<sup>-x</sup>)' = -e<sup>-x</sup></span>.",
+  solution: "<span class=\"math\">u = x<sup>2</sup></span>, <span class=\"math\">u' = 2x</span>, <span class=\"math\">v = e<sup>-x</sup></span>, <span class=\"math\">v' = -e<sup>-x</sup></span>. <br><span class=\"math\">f'(x) = 2x · e<sup>-x</sup> + x<sup>2</sup> · (-e<sup>-x</sup>) = e<sup>-x</sup>(2x - x<sup>2</sup>) = x(2 - x)e<sup>-x</sup></span>."
+},
+{ block: 9, title: "Verhalten für <span class=\"math\">x → ±∞</span> verknüpfter e-Funktionen",
+  aufgabe: "Bestimme das Verhalten von <span class=\"math\">f(x) = x · e<sup>-x</sup></span> für <span class=\"math\">x → +∞</span> und <span class=\"math\">x → -∞</span>.",
+  hint: "Für <span class=\"math\">x → +∞</span>: e-Funktion 'dominiert' (geht gegen 0 stärker als <span class=\"math\">x</span> wächst). Für <span class=\"math\">x → -∞</span>: <span class=\"math\">e<sup>-x</sup> → +∞</span>.",
+  solution: "<span class=\"math\">x → +∞</span>: <span class=\"math\">e<sup>-x</sup> → 0</span>, 'e-Funktion gewinnt' → <span class=\"math\">f(x) → 0</span>. <br><span class=\"math\">x → -∞</span>: <span class=\"math\">x → -∞</span> und <span class=\"math\">e<sup>-x</sup> → +∞</span> → <span class=\"math\">f(x) → -∞</span>."
+},
+{ block: 9, title: "Vorzeichenskizze von <span class=\"math\">f'</span> → Monotonie und Extrempunkte",
+  aufgabe: "Erstelle eine Vorzeichenskizze von <span class=\"math\">f'(x) = x(2 - x)e<sup>-x</sup></span> und gib Monotonie sowie Extrempunkte des Graphen von <span class=\"math\">f</span> an.",
+  hint: "<span class=\"math\">e<sup>-x</sup> > 0</span> stets. Nullstellen von <span class=\"math\">f'</span>: <span class=\"math\">x = 0</span> und <span class=\"math\">x = 2</span>. Vorzeichen von <span class=\"math\">x(2-x)</span> in Intervallen prüfen.",
+  solution: "<span class=\"math\">f'</span>-Nullstellen: <span class=\"math\">x = 0</span> und <span class=\"math\">x = 2</span>. <br>VZ von <span class=\"math\">x(2-x)</span>: <span class=\"math\">x<0</span>: <span class=\"math\">(-)(+) = -</span>; <span class=\"math\">0<x<2</span>: <span class=\"math\">(+)(+)= +</span>; <span class=\"math\">x>2</span>: <span class=\"math\">(+)(-) = -</span>. <br>Tiefpunkt bei <span class=\"math\">x = 0</span> (VZW von <span class=\"math\">-</span> nach <span class=\"math\">+</span>), Hochpunkt bei <span class=\"math\">x = 2</span> (VZW <span class=\"math\">+</span> nach <span class=\"math\">-</span>)."
+},
+{ block: 9, title: "Stelle größter momentaner Änderungsrate",
+  aufgabe: "An welcher Stelle hat <span class=\"math\">f(x) = e<sup>-x<sup>2</sup></sup></span> die größte momentane Abnahmerate?",
+  hint: "Größte Abnahme = Tiefpunkt (Minimum) von <span class=\"math\">f'</span>, also <span class=\"math\">f''(x) = 0</span> mit Vorzeichenwechsel.",
+  solution: "<span class=\"math\">f'(x) = -2x · e<sup>-x<sup>2</sup></sup></span>, <span class=\"math\">f''(x) = (-2 + 4x<sup>2</sup>) · e<sup>-x<sup>2</sup></sup></span>. <br><span class=\"math\">f''(x) = 0 ⇒ 4x<sup>2</sup> = 2 ⇒ x = ± <span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">√(2)</span></span></span>. <br>Größte Abnahme bei <span class=\"math\">x = <span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">√(2)</span></span> ≈ 0,71</span>."
+},
+{ block: 9, title: "Wert der größten momentanen Änderungsrate",
+  aufgabe: "Berechne den Wert der größten momentanen Änderungsrate (Wachstumsrate) von <span class=\"math\">f(x) = x · e<sup>-x</sup></span> an der Wendestelle <span class=\"math\">x<sub>W</sub> = 0</span>.",
+  hint: "Wert = <span class=\"math\">f'(x<sub>W</sub>)</span>. Vorher <span class=\"math\">f'</span> bilden.",
+  solution: "<span class=\"math\">f'(x) = e<sup>-x</sup> - x · e<sup>-x</sup> = (1 - x) e<sup>-x</sup></span>. <br><span class=\"math\">f'(0) = 1 · 1 = 1</span>. <br>Größte momentane Wachstumsrate: <span class=\"math\">1</span>."
+},
+{ block: 9, title: "Graph einer verknüpften e-Funktion zeichnen",
+  aufgabe: "Skizziere den Graphen von <span class=\"math\">f(x) = x · e<sup>-x</sup></span> mit Nullstelle, Hochpunkt und Verhalten im Unendlichen.",
+  hint: "Nullstelle bei <span class=\"math\">x = 0</span>. <span class=\"math\">f'(x) = (1-x)e<sup>-x</sup></span> → Hochpunkt bei <span class=\"math\">x = 1</span>. Verhalten im Unendlichen aus vorheriger Aufgabe.",
+  solution: "Nullstelle: <span class=\"math\">x = 0</span>. <br>Hochpunkt: <span class=\"math\">H(1 | <span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">e</span></span>) ≈ (1 | 0,37)</span>. <br>Für <span class=\"math\">x → -∞</span>: <span class=\"math\">f → -∞</span>; für <span class=\"math\">x → +∞</span>: <span class=\"math\">f → 0<sup>+</sup></span> (x-Achse Asymptote). Graph kommt von unten links, geht durch 0, steigt zum Hochpunkt, fällt langsam gegen 0."
+},
+
+// ============= BLOCK 10: Stammfunktion, Integral & Flächen =============
+{ block: 10, title: "Stammfunktion, Integrationskonstante, unbestimmtes Integral erklären",
+  aufgabe: "Erkläre die Begriffe <em>Stammfunktion</em>, <em>Integrationskonstante</em> und <em>unbestimmtes Integral</em>.",
+  hint: "Stammfunktion = 'Rückgängigmachen des Ableitens'.",
+  solution: "<strong>Stammfunktion</strong> <span class=\"math\">F</span> einer Funktion <span class=\"math\">f</span>: Es gilt <span class=\"math\">F'(x) = f(x)</span>. <br><strong>Integrationskonstante</strong> <span class=\"math\">C</span>: Da Konstanten beim Ableiten verschwinden, gibt es unendlich viele Stammfunktionen, die sich nur um eine Konstante <span class=\"math\">C</span> unterscheiden. <br><strong>Unbestimmtes Integral</strong>: <span class=\"math\">[\int] f(x) dx = F(x) + C</span>."
+},
+{ block: 10, title: "Stammfunktion ganzrationaler Funktionen",
+  aufgabe: "Bestimme eine Stammfunktion von <span class=\"math\">f(x) = 3x<sup>2</sup> - 4x + 5</span>.",
+  hint: "Potenzregel rückwärts: <span class=\"math\">[\bigl](x<sup>n</sup>[\bigr])</span> → <span class=\"math\"><span class=\"frac\"><span class=\"num\">x<sup>n+1</sup></span><span class=\"den\">n+1</span></span></span>.",
+  solution: "<span class=\"math\">F(x) = x<sup>3</sup> - 2x<sup>2</sup> + 5x  (+ C)</span>."
+},
+{ block: 10, title: "Zusammenhang <span class=\"math\">f</span> ↔ <span class=\"math\">F</span>",
+  aufgabe: "<span class=\"math\">F</span> ist Stammfunktion von <span class=\"math\">f</span>. <span class=\"math\">f</span> hat eine Nullstelle bei <span class=\"math\">x = 2</span> mit Vorzeichenwechsel von <span class=\"math\">+</span> nach <span class=\"math\">-</span>. Welcher Punkttyp liegt bei <span class=\"math\">F</span> in <span class=\"math\">x = 2</span> vor?",
+  hint: "<span class=\"math\">f = F'</span>. Bei einem Vorzeichenwechsel von <span class=\"math\">F'</span> liegt ein Extrempunkt von <span class=\"math\">F</span> vor.",
+  solution: "<span class=\"math\">F'</span> hat in <span class=\"math\">x = 2</span> Vorzeichenwechsel von <span class=\"math\">+</span> nach <span class=\"math\">-</span> → <span class=\"math\">F</span> hat dort einen <strong>Hochpunkt</strong>."
+},
+{ block: 10, title: "Flächenbilanz vs. Flächeninhalt",
+  aufgabe: "Was ist der Unterschied zwischen Flächenbilanz und Flächeninhalt?",
+  hint: "Vorzeichen beachten: Flächen unter der x-Achse zählen für die Bilanz negativ.",
+  solution: "<strong>Flächenbilanz</strong>: Wert des bestimmten Integrals <span class=\"math\">[\int]<sub>a</sub><sup>b</sup> f(x) dx</span> – Flächen unter der x-Achse zählen <em>negativ</em>. <br><strong>Flächeninhalt</strong>: stets positive Maßzahl der Fläche – Teilflächen müssen ggf. einzeln berechnet und ihre Beträge addiert werden."
+},
+{ block: 10, title: "Fläche zwischen Graph und x-Achse",
+  aufgabe: "Berechne den Flächeninhalt zwischen dem Graphen von <span class=\"math\">f(x) = -x<sup>2</sup> + 4</span> und der x-Achse.",
+  hint: "Nullstellen bestimmen → Integrationsgrenzen. Da der Graph oberhalb der x-Achse verläuft, liefert das Integral direkt den Flächeninhalt.",
+  solution: "Nullstellen: <span class=\"math\">x = ± 2</span>. <br><span class=\"math\">A = [\int]<sub>-2</sub><sup>2</sup> (-x<sup>2</sup> + 4) dx = [-<span class=\"frac\"><span class=\"num\">x<sup>3</sup></span><span class=\"den\">3</span></span> + 4x]<sub>-2</sub><sup>2</sup> = (-<span class=\"frac\"><span class=\"num\">8</span><span class=\"den\">3</span></span> + 8) - (<span class=\"frac\"><span class=\"num\">8</span><span class=\"den\">3</span></span> - 8) = <span class=\"frac\"><span class=\"num\">32</span><span class=\"den\">3</span></span> ≈ 10,67</span> FE."
+},
+{ block: 10, title: "Fläche zwischen zwei Graphen",
+  aufgabe: "Berechne den Flächeninhalt zwischen den Graphen von <span class=\"math\">f(x) = x<sup>2</sup></span> und <span class=\"math\">g(x) = 2x</span>.",
+  hint: "Schnittpunkte = Integrationsgrenzen. Im Integral steht <span class=\"math\">g - f</span> (obere minus untere Funktion).",
+  solution: "Schnittstellen: <span class=\"math\">x<sup>2</sup> = 2x ⇒ x<sub>1</sub> = 0</span>, <span class=\"math\">x<sub>2</sub> = 2</span>. Im Intervall ist <span class=\"math\">g ≥ f</span>. <br><span class=\"math\">A = [\int]<sub>0</sub><sup>2</sup> (2x - x<sup>2</sup>) dx = [x<sup>2</sup> - <span class=\"frac\"><span class=\"num\">x<sup>3</sup></span><span class=\"den\">3</span></span>]<sub>0</sub><sup>2</sup> = 4 - <span class=\"frac\"><span class=\"num\">8</span><span class=\"den\">3</span></span> = <span class=\"frac\"><span class=\"num\">4</span><span class=\"den\">3</span></span></span> FE."
+},
+{ block: 10, title: "Durchschnittlicher Funktionswert",
+  aufgabe: "Bestimme den durchschnittlichen Funktionswert von <span class=\"math\">f(x) = x<sup>2</sup></span> im Intervall <span class=\"math\">[0; 3]</span>.",
+  hint: "<span class=\"math\"><span class=\"overline\">f</span> = <span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">b-a</span></span> [\int]<sub>a</sub><sup>b</sup> f(x) dx</span>.",
+  solution: "<span class=\"math\"><span class=\"overline\">f</span> = <span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">3</span></span> [\int]<sub>0</sub><sup>3</sup> x<sup>2</sup> dx = <span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">3</span></span> · [<span class=\"frac\"><span class=\"num\">x<sup>3</sup></span><span class=\"den\">3</span></span>]<sub>0</sub><sup>3</sup> = <span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">3</span></span> · 9 = 3</span>."
+},
+{ block: 10, title: "Anwendungsaufgabe Integral",
+  aufgabe: "Die Geschwindigkeit eines Autos beträgt <span class=\"math\">v(t) = 0,5t<sup>2</sup></span> (in m/s, <span class=\"math\">t</span> in s). Welche Strecke wird in den ersten 6 Sekunden zurückgelegt?",
+  hint: "Strecke = Integral der Geschwindigkeit: <span class=\"math\">s = [\int]<sub>0</sub><sup>6</sup> v(t) dt</span>.",
+  solution: "<span class=\"math\">s = [\int]<sub>0</sub><sup>6</sup> 0,5  t<sup>2</sup> dt = [<span class=\"frac\"><span class=\"num\">t<sup>3</sup></span><span class=\"den\">6</span></span>]<sub>0</sub><sup>6</sup> = <span class=\"frac\"><span class=\"num\">216</span><span class=\"den\">6</span></span> = 36 </span>m."
+},
+
+// ============= BLOCK 11: Zufallsexperiment und Ereignis =============
+{ block: 11, title: "Ergebnis, Ergebnisraum, Ereignis",
+  aufgabe: "Ein Würfel wird einmal geworfen. Gib Ergebnisraum <span class=\"math\">Ω</span>, ein Beispiel für ein Ergebnis und das Ereignis <span class=\"math\">A</span> = 'gerade Zahl' mit Mächtigkeiten an.",
+  hint: "<span class=\"math\">Ω</span> = Menge aller Ergebnisse. Ereignis = Teilmenge von <span class=\"math\">Ω</span>.",
+  solution: "<span class=\"math\">Ω = {1; 2; 3; 4; 5; 6}</span>, <span class=\"math\">|Ω| = 6</span>. <br>Beispiel-Ergebnis: <span class=\"math\">4</span>. <br><span class=\"math\">A = {2; 4; 6}</span>, <span class=\"math\">|A| = 3</span>."
+},
+{ block: 11, title: "Ereignisse schneiden / vereinen / Gegenereignis",
+  aufgabe: "Würfeln. <span class=\"math\">A</span> = 'gerade Zahl', <span class=\"math\">B</span> = 'Zahl ≥ 4'. Gib <span class=\"math\">A ∩ B</span>, <span class=\"math\">A ∪ B</span> und <span class=\"math\"><span class=\"overline\">A</span></span> an.",
+  hint: "Schnitt: in beiden. Vereinigung: in mindestens einem. Gegenereignis: alles, was <em>nicht</em> in <span class=\"math\">A</span> ist.",
+  solution: "<span class=\"math\">A = {2;4;6}</span>, <span class=\"math\">B = {4;5;6}</span>. <br><span class=\"math\">A ∩ B = {4;6}</span>, <span class=\"math\">A ∪ B = {2;4;5;6}</span>, <span class=\"math\"><span class=\"overline\">A</span> = {1;3;5}</span>."
+},
+{ block: 11, title: "Gesetze von de Morgan anwenden",
+  aufgabe: "Vereinfache mit den Gesetzen von de Morgan: <span class=\"math\"><span class=\"overline\">A ∪ B</span></span>.",
+  hint: "<span class=\"math\"><span class=\"overline\">A ∪ B</span> = <span class=\"overline\">A</span> ∩ <span class=\"overline\">B</span></span>.",
+  solution: "<span class=\"math\"><span class=\"overline\">A ∪ B</span> = <span class=\"overline\">A</span> ∩ <span class=\"overline\">B</span></span> (nicht <span class=\"math\">A</span> <em>und</em> nicht <span class=\"math\">B</span>)."
+},
+{ block: 11, title: "Mögliche, unmögliche, sichere Ereignisse",
+  aufgabe: "Würfeln. Ordne zu, ob möglich (aber nicht sicher), unmöglich oder sicher: <br>(a) Augenzahl 7 &nbsp; (b) Augenzahl ≤ 6 &nbsp; (c) Augenzahl 3.",
+  hint: "Vergleich mit <span class=\"math\">Ω = {1;…;6}</span>.",
+  solution: "(a) <strong>unmöglich</strong>; (b) <strong>sicher</strong>; (c) <strong>möglich</strong> (aber nicht sicher)."
+},
+{ block: 11, title: "Vereinbar / unvereinbar",
+  aufgabe: "Sind die Ereignisse <span class=\"math\">A</span> = 'gerade Zahl' und <span class=\"math\">B</span> = 'Primzahl' beim Würfeln vereinbar?",
+  hint: "Vereinbar: <span class=\"math\">A ∩ B ≠ ∅</span>.",
+  solution: "<span class=\"math\">A = {2;4;6}</span>, <span class=\"math\">B = {2;3;5}</span>, <span class=\"math\">A ∩ B = {2} ≠ ∅</span>. <br>Die Ereignisse sind <strong>vereinbar</strong>."
+},
+{ block: 11, title: "Ereignisverknüpfung im Venn-Diagramm",
+  aufgabe: "Stelle in einem Venn-Diagramm das Ereignis <span class=\"math\">A ∩ <span class=\"overline\">B</span></span> dar (in Worten und durch Schraffur beschreiben).",
+  hint: "Alles, was in <span class=\"math\">A</span> liegt, aber <em>nicht</em> in <span class=\"math\">B</span>.",
+  solution: "Im Venn-Diagramm: nur der Teil von <span class=\"math\">A</span> schraffieren, der <strong>außerhalb</strong> von <span class=\"math\">B</span> liegt (also <span class=\"math\">A</span> ohne den Schnitt mit <span class=\"math\">B</span>). In Worten: A tritt ein, aber B nicht."
+},
+{ block: 11, title: "Baumdiagramm aufstellen",
+  aufgabe: "Eine Münze wird zweimal geworfen. Skizziere den Aufbau des Baumdiagramms (Pfade) und gib alle Ergebnisse an.",
+  hint: "Erste Stufe: Kopf (K) oder Zahl (Z). Zweite Stufe: ebenso.",
+  solution: "1. Stufe: K, Z. 2. Stufe an jedem Ast wieder K, Z. <br>Ergebnisse: <span class=\"math\">(K,K),  (K,Z),  (Z,K),  (Z,Z)</span>."
+},
+
+// ============= BLOCK 12: Relative Häufigkeit & Wahrscheinlichkeit =============
+{ block: 12, title: "Wahrscheinlichkeit im Laplace-Experiment",
+  aufgabe: "Aus einer Urne mit 4 roten und 6 blauen Kugeln wird eine gezogen. Wie groß ist die Wahrscheinlichkeit für 'rot'?",
+  hint: "Laplace: <span class=\"math\">P(A) = <span class=\"frac\"><span class=\"num\">|A|</span><span class=\"den\">|Ω|</span></span></span>.",
+  solution: "<span class=\"math\">P(rot) = <span class=\"frac\"><span class=\"num\">4</span><span class=\"den\">10</span></span> = 0,4 = 40 %</span>."
+},
+{ block: 12, title: "Baumdiagramm mit Pfadregeln",
+  aufgabe: "Aus einer Urne mit 3 roten und 2 blauen Kugeln wird zweimal <em>ohne</em> Zurücklegen gezogen. Wie groß ist <span class=\"math\">P(beide rot)</span>?",
+  hint: "Pfadregel: Wahrscheinlichkeiten entlang eines Pfades multiplizieren. Nach 1. Ziehung: nur noch 4 Kugeln.",
+  solution: "<span class=\"math\">P(rot, rot) = <span class=\"frac\"><span class=\"num\">3</span><span class=\"den\">5</span></span> · <span class=\"frac\"><span class=\"num\">2</span><span class=\"den\">4</span></span> = <span class=\"frac\"><span class=\"num\">6</span><span class=\"den\">20</span></span> = 0,3</span>."
+},
+{ block: 12, title: "Vierfeldertafel erstellen",
+  aufgabe: "In einer Klasse sind 60 % Mädchen, 30 % der Schüler tragen eine Brille, davon sind 70 % Mädchen. Erstelle eine Vierfeldertafel der Wahrscheinlichkeiten.",
+  hint: "<span class=\"math\">P(Mädchen) = 0,6</span>, <span class=\"math\">P(Brille) = 0,3</span>. Schnitt: <span class=\"math\">P(Mädchen und Brille) = 0,7 · 0,3 = 0,21</span>. Rest durch Differenz.",
+  solution: "<div class=\"math-display\">[\begin]arrayc|cc|c & B & <span class=\"overline\">B</span> & [\sum] <br>\ [\hline] M & 0,21 & 0,39 & 0,60 <br>\ <span class=\"overline\">M</span> & 0,09 & 0,31 & 0,40 <br>\ [\hline] [\sum] & 0,30 & 0,70 & 1 [\end]array</div>"
+},
+{ block: 12, title: "Bedingte Wahrscheinlichkeit erkennen und berechnen",
+  aufgabe: "Aus der Vierfeldertafel oben: Wie groß ist die Wahrscheinlichkeit, dass eine zufällig ausgewählte Person eine Brille trägt, <em>wenn man weiß, dass sie ein Mädchen ist</em>?",
+  hint: "Bedingte Wahrscheinlichkeit: <span class=\"math\">P<sub>M</sub>(B) = <span class=\"frac\"><span class=\"num\">P(M ∩ B)</span><span class=\"den\">P(M)</span></span></span>.",
+  solution: "<span class=\"math\">P<sub>M</sub>(B) = <span class=\"frac\"><span class=\"num\">0,21</span><span class=\"den\">0,60</span></span> = 0,35 = 35 %</span>."
+},
+{ block: 12, title: "Baumdiagramm ↔ Vierfeldertafel",
+  aufgabe: "Aus der gleichen Vierfeldertafel: Trage die bedingten Wahrscheinlichkeiten in ein Baumdiagramm mit erster Stufe 'Mädchen / Junge' ein. Welche Werte stehen an den 4 Ästen der 2. Stufe?",
+  hint: "An den Ästen 2. Stufe stehen bedingte Wahrscheinlichkeiten, z.B. <span class=\"math\">P<sub>M</sub>(B)</span> und <span class=\"math\">P<sub>M</sub>(<span class=\"overline\">B</span>)</span>.",
+  solution: "Nach <span class=\"math\">M</span>: <span class=\"math\">P<sub>M</sub>(B) = <span class=\"frac\"><span class=\"num\">0,21</span><span class=\"den\">0,60</span></span> = 0,35</span> und <span class=\"math\">P<sub>M</sub>(<span class=\"overline\">B</span>) = 0,65</span>. <br>Nach <span class=\"math\"><span class=\"overline\">M</span></span>: <span class=\"math\">P<sub><span class=\"overline\">M</span></sub>(B) = <span class=\"frac\"><span class=\"num\">0,09</span><span class=\"den\">0,40</span></span> = 0,225</span> und <span class=\"math\">P<sub><span class=\"overline\">M</span></sub>(<span class=\"overline\">B</span>) = 0,775</span>."
+},
+{ block: 12, title: "Stochastische Unabhängigkeit prüfen",
+  aufgabe: "Sind die Ereignisse <span class=\"math\">M</span> ('Mädchen', <span class=\"math\">P(M) = 0,6</span>) und <span class=\"math\">B</span> ('Brille', <span class=\"math\">P(B) = 0,3</span>) aus der obigen Vierfeldertafel stochastisch unabhängig?",
+  hint: "Unabhängig <span class=\"math\">⇔</span> <span class=\"math\">P(M ∩ B) = P(M) · P(B)</span>.",
+  solution: "<span class=\"math\">P(M) · P(B) = 0,6 · 0,3 = 0,18</span>. <br><span class=\"math\">P(M ∩ B) = 0,21 ≠ 0,18</span>. <br>Die Ereignisse sind <strong>nicht</strong> unabhängig."
+},
+
+// ============= BLOCK 13: Kombinatorik =============
+{ block: 13, title: "Allgemeines Zählprinzip",
+  aufgabe: "Ein Code besteht aus 1 Buchstabe (A–Z, 26 Möglichkeiten) gefolgt von 2 Ziffern (0–9). Wie viele verschiedene Codes gibt es?",
+  hint: "Zählprinzip: Möglichkeiten der Stufen multiplizieren.",
+  solution: "<span class=\"math\">26 · 10 · 10 = 2600</span> Codes."
+},
+{ block: 13, title: "Mit / ohne Zurücklegen, mit / ohne Reihenfolge",
+  aufgabe: "Aus 10 Personen wird ein 3-köpfiger Vorstand (Vorsitz, Stellvertretung, Kasse) gewählt. Wie viele Möglichkeiten gibt es?",
+  hint: "Ohne Zurücklegen, mit Reihenfolge → Permutation: <span class=\"math\"><span class=\"frac\"><span class=\"num\">n!</span><span class=\"den\">(n-k)!</span></span></span>.",
+  solution: "<span class=\"math\">10 · 9 · 8 = 720</span> Möglichkeiten."
+},
+{ block: 13, title: "Kombinatorisches Modell wählen",
+  aufgabe: "Aus 10 Personen wird eine 3-köpfige Arbeitsgruppe (ohne Ämter) gebildet. Wie viele Möglichkeiten gibt es?",
+  hint: "Ohne Zurücklegen, ohne Reihenfolge → Binomialkoeffizient <span class=\"math\"><span class=\"binom\">(<span class=\"num\">n</span><span class=\"den\">k</span>)</span></span>.",
+  solution: "<span class=\"math\"><span class=\"binom\">(<span class=\"num\">10</span><span class=\"den\">3</span>)</span> = <span class=\"frac\"><span class=\"num\">10!</span><span class=\"den\">3! · 7!</span></span> = 120</span> Möglichkeiten."
+},
+{ block: 13, title: "Kombiniertes Zählen",
+  aufgabe: "Eine Klasse hat 12 Mädchen und 10 Jungen. Es soll ein Team aus 2 Mädchen und 3 Jungen gebildet werden. Wie viele Möglichkeiten gibt es?",
+  hint: "Mädchen-Auswahl mal Jungen-Auswahl (jeweils ohne Reihenfolge).",
+  solution: "<span class=\"math\"><span class=\"binom\">(<span class=\"num\">12</span><span class=\"den\">2</span>)</span> · <span class=\"binom\">(<span class=\"num\">10</span><span class=\"den\">3</span>)</span> = 66 · 120 = 7920</span> Möglichkeiten."
+},
+
+// ============= BLOCK 14: Bernoulli-Ketten =============
+{ block: 14, title: "Bernoulli-Experiment / -Kette erkennen",
+  aufgabe: "Welche der folgenden Vorgänge sind Bernoulli-Ketten? <br>(a) 5x würfeln, jedes Mal beobachten, ob 'Sechs' fällt. &nbsp; (b) Solange ziehen, bis erstmals rot kommt (Ziehen ohne Zurücklegen).",
+  hint: "Bernoulli-Kette: feste Zahl <span class=\"math\">n</span> unabhängiger Versuche, je nur Treffer/Niete mit konstanter Wahrscheinlichkeit <span class=\"math\">p</span>.",
+  solution: "(a) <strong>Ja</strong>: <span class=\"math\">n = 5</span>, Trefferwahrscheinlichkeit <span class=\"math\">p = <span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">6</span></span></span> in jedem Versuch konstant. <br>(b) <strong>Nein</strong>: <span class=\"math\">n</span> nicht festgelegt; ohne Zurücklegen ändert sich <span class=\"math\">p</span>."
+},
+{ block: 14, title: "Bernoulli-Formel anwenden",
+  aufgabe: "Eine Münze wird 6-mal geworfen. Wie groß ist die Wahrscheinlichkeit für genau 4-mal 'Kopf'?",
+  hint: "<span class=\"math\">P(X = k) = <span class=\"binom\">(<span class=\"num\">n</span><span class=\"den\">k</span>)</span> p<sup>k</sup> (1-p)<sup>n-k</sup></span> mit <span class=\"math\">n = 6</span>, <span class=\"math\">k = 4</span>, <span class=\"math\">p = 0,5</span>.",
+  solution: "<span class=\"math\">P(X = 4) = <span class=\"binom\">(<span class=\"num\">6</span><span class=\"den\">4</span>)</span> · 0,5<sup>4</sup> · 0,5<sup>2</sup> = 15 · 0,015625 · 0,25 ≈ 0,234 = 23,4 %</span>."
+},
+{ block: 14, title: "Sonderfälle: mindestens / höchstens",
+  aufgabe: "Ein Würfel wird 4-mal geworfen. Berechne die Wahrscheinlichkeit, mindestens einmal eine 'Sechs' zu würfeln.",
+  hint: "Gegenereignis: keine Sechs in allen 4 Würfen → <span class=\"math\">P = (5/6)<sup>4</sup></span>. Dann <span class=\"math\">1 - …</span>.",
+  solution: "<span class=\"math\">P(keine Sechs) = (<span class=\"frac\"><span class=\"num\">5</span><span class=\"den\">6</span></span>)<sup>4</sup> ≈ 0,482</span>. <br><span class=\"math\">P(mind. eine Sechs) = 1 - 0,482 = 0,518 ≈ 51,8 %</span>."
+},
+{ block: 14, title: "Trefferwahrscheinlichkeit <span class=\"math\">p</span> ermitteln",
+  aufgabe: "Bei einer Bernoulli-Kette mit <span class=\"math\">n = 10</span> Versuchen ist die Wahrscheinlichkeit, keinen Treffer zu erzielen, <span class=\"math\">0,107</span>. Bestimme <span class=\"math\">p</span>.",
+  hint: "<span class=\"math\">P(X = 0) = (1 - p)<sup>10</sup> = 0,107</span>. Wurzel ziehen.",
+  solution: "<span class=\"math\">(1 - p)<sup>10</sup> = 0,107 ⇒ 1 - p = 0,107<sup>1/10</sup> ≈ 0,80 ⇒ p ≈ 0,20</span>."
+},
+
+// ============= BLOCK 15: Zufallsgrößen & Wahrscheinlichkeitsverteilungen =============
+{ block: 15, title: "Binomialverteilt vs. nicht binomialverteilt",
+  aufgabe: "Welche der folgenden Zufallsgrößen ist binomialverteilt? <br>(a) <span class=\"math\">X</span>: Anzahl der Sechser bei 8-maligem Würfeln. &nbsp; (b) <span class=\"math\">Y</span>: Augensumme bei 2-maligem Würfeln.",
+  hint: "Binomial: feste Anzahl Bernoulli-Versuche, Trefferzahl wird gezählt.",
+  solution: "(a) <strong>Binomialverteilt</strong> mit <span class=\"math\">n = 8</span>, <span class=\"math\">p = <span class=\"frac\"><span class=\"num\">1</span><span class=\"den\">6</span></span></span>. <br>(b) <strong>Nicht binomialverteilt</strong> – <span class=\"math\">Y</span> kann Werte 2 bis 12 mit unterschiedlichen Wahrscheinlichkeiten annehmen, das ist keine Trefferanzahl."
+},
+{ block: 15, title: "Zufallsgröße und Wahrscheinlichkeitsverteilung",
+  aufgabe: "Eine Münze wird 2-mal geworfen. <span class=\"math\">X</span> = Anzahl der 'Kopf'-Würfe. Stelle die Wahrscheinlichkeitsverteilung von <span class=\"math\">X</span> in einer Tabelle dar.",
+  hint: "Mögliche Werte <span class=\"math\">0</span>, <span class=\"math\">1</span>, <span class=\"math\">2</span>. Wahrscheinlichkeiten mit Bernoulli-Formel oder Pfadregeln.",
+  solution: "<div class=\"math-display\">[\begin]arrayc|c|c|c x & 0 & 1 & 2 <br>\ [\hline] P(X = x) & 0,25 & 0,50 & 0,25 [\end]array</div>"
+},
+{ block: 15, title: "Erwartungswert, Varianz, Standardabweichung (binomial)",
+  aufgabe: "Berechne <span class=\"math\">E(X)</span>, <span class=\"math\">Var(X)</span> und <span class=\"math\">σ</span> für eine binomialverteilte Zufallsgröße mit <span class=\"math\">n = 20</span> und <span class=\"math\">p = 0,3</span>.",
+  hint: "Binomial: <span class=\"math\">E(X) = np</span>, <span class=\"math\">Var(X) = np(1-p)</span>, <span class=\"math\">σ = √(Var(X))</span>.",
+  solution: "<span class=\"math\">E(X) = 20 · 0,3 = 6</span>. <br><span class=\"math\">Var(X) = 20 · 0,3 · 0,7 = 4,2</span>. <br><span class=\"math\">σ = √(4,2) ≈ 2,05</span>."
+},
+{ block: 15, title: "Erwartungswert nicht-binomial berechnen",
+  aufgabe: "Eine Zufallsgröße <span class=\"math\">X</span> habe folgende Verteilung: <span class=\"math\">P(X=0) = 0,5</span>, <span class=\"math\">P(X=2) = 0,3</span>, <span class=\"math\">P(X=5) = 0,2</span>. Berechne <span class=\"math\">E(X)</span>.",
+  hint: "<span class=\"math\">E(X) = [\sum] x<sub>i</sub> · P(X = x<sub>i</sub>)</span>.",
+  solution: "<span class=\"math\">E(X) = 0 · 0,5 + 2 · 0,3 + 5 · 0,2 = 0 + 0,6 + 1 = 1,6</span>."
+},
+{ block: 15, title: "Wahrscheinlichkeitsverteilung visualisieren",
+  aufgabe: "Skizziere ein Stabdiagramm für die Verteilung aus der Aufgabe 2 (Münze, 2 Würfe).",
+  hint: "x-Achse: Werte von <span class=\"math\">X</span>. y-Achse: Wahrscheinlichkeiten. Stäbe gleicher Breite.",
+  solution: "Drei Stäbe: bei <span class=\"math\">x = 0</span> Höhe <span class=\"math\">0,25</span>, bei <span class=\"math\">x = 1</span> Höhe <span class=\"math\">0,50</span>, bei <span class=\"math\">x = 2</span> Höhe <span class=\"math\">0,25</span>."
+},
+
+// ============= BLOCK 16: Hypothesentests =============
+{ block: 16, title: "Nullhypothese und Gegenhypothese",
+  aufgabe: "Ein Hersteller behauptet: Höchstens 5 % seiner Produkte sind defekt. Ein Verbraucherschützer vermutet, dass es mehr sind. Formuliere <span class=\"math\">H<sub>0</sub></span> und <span class=\"math\">H<sub>1</sub></span>.",
+  hint: "Üblich: <span class=\"math\">H<sub>0</sub></span> enthält die Annahme, die der Test eigentlich entkräften soll (Vorteil für 'Behauptung' → strenge Prüfung).",
+  solution: "<span class=\"math\">H<sub>0</sub></span>: <span class=\"math\">p ≤ 0,05</span> (Behauptung des Herstellers). <br><span class=\"math\">H<sub>1</sub></span>: <span class=\"math\">p > 0,05</span> (Vermutung des Verbraucherschützers). <br>Es handelt sich um einen <strong>rechtsseitigen</strong> Test."
+},
+{ block: 16, title: "Fehler 1. und 2. Art im Sachzusammenhang",
+  aufgabe: "Beschreibe im Kontext der vorigen Aufgabe (Defektquote) den Fehler 1. Art und den Fehler 2. Art in Worten.",
+  hint: "Fehler 1. Art: <span class=\"math\">H<sub>0</sub></span> wird abgelehnt, obwohl <span class=\"math\">H<sub>0</sub></span> wahr ist. Fehler 2. Art: <span class=\"math\">H<sub>0</sub></span> wird beibehalten, obwohl <span class=\"math\">H<sub>1</sub></span> wahr ist.",
+  solution: "<strong>Fehler 1. Art</strong>: Der Hersteller wird unberechtigt verurteilt – tatsächlich ist die Defektquote ≤ 5 %, der Test sagt aber '> 5 %'. <br><strong>Fehler 2. Art</strong>: Eine zu hohe Defektquote bleibt unentdeckt – tatsächlich ist <span class=\"math\">p > 5 %</span>, der Test stuft sie aber als akzeptabel ein."
+},
+{ block: 16, title: "Annahme- und Ablehnungsbereich, kritische Zahl <span class=\"math\">k</span>",
+  aufgabe: "Es wird eine Stichprobe von <span class=\"math\">n = 50</span> Produkten gezogen. Unter <span class=\"math\">H<sub>0</sub></span>: <span class=\"math\">p = 0,05</span> ist <span class=\"math\">X</span> binomialverteilt. Bestimme bei einem Signifikanzniveau <span class=\"math\">α = 5 %</span> die kleinste kritische Zahl <span class=\"math\">k</span>, sodass <span class=\"math\">P(X ≥ k) ≤ 0,05</span> (rechtsseitiger Test). Tabellenwert: <span class=\"math\">P(X ≤ 5) ≈ 0,9622</span>, <span class=\"math\">P(X ≤ 6) ≈ 0,9882</span>.",
+  hint: "Rechtsseitig: Ablehnungsbereich <span class=\"math\">{k; k+1; …; n}</span>. Bedingung: <span class=\"math\">P(X ≥ k) = 1 - P(X ≤ k-1) ≤ α</span>.",
+  solution: "<span class=\"math\">P(X ≥ 6) = 1 - P(X ≤ 5) ≈ 1 - 0,9622 = 0,0378 ≤ 0,05</span> ✓ <br><span class=\"math\">P(X ≥ 5) = 1 - P(X ≤ 4) > 0,05</span> ✗ <br><span class=\"math\">⇒ k = 6</span>. Annahmebereich: <span class=\"math\">{0; 1; …; 5}</span>, Ablehnungsbereich: <span class=\"math\">{6; 7; …; 50}</span>."
+},
+{ block: 16, title: "Wahrscheinlichkeit für Fehler 1. Art",
+  aufgabe: "Bestimme im obigen Test die tatsächliche Wahrscheinlichkeit für den Fehler 1. Art (sog. <span class=\"math\">α'</span>-Fehler).",
+  hint: "<span class=\"math\">α' = P({</span>H_0<span class=\"math\"> abgelehnt | H<sub>0</sub>)</span> = <span class=\"math\">P(X ≥ k)</span> unter <span class=\"math\">H<sub>0</sub></span>.",
+  solution: "<span class=\"math\">α' = P<sub>H<sub>0</sub></sub>(X ≥ 6) = 1 - P(X ≤ 5) ≈ 1 - 0,9622 = 0,0378 ≈ 3,78 %</span>."
+},
+{ block: 16, title: "Wahrscheinlichkeit für Fehler 2. Art",
+  aufgabe: "Tatsächlich gelte <span class=\"math\">p = 0,15</span>. Bestimme die Wahrscheinlichkeit für den Fehler 2. Art im obigen Test. Tabellenwert: <span class=\"math\">P<sub>p=0,15</sub>(X ≤ 5) ≈ 0,2194</span>.",
+  hint: "<span class=\"math\">β = P({</span>H_0<span class=\"math\"> beibehalten | H<sub>1</sub> wahr)</span> = <span class=\"math\">P<sub>p=0,15</sub>(X ≤ 5)</span>.",
+  solution: "<span class=\"math\">β = P<sub>p = 0,15</sub>(X ≤ 5) ≈ 0,2194 = 21,94 %</span>. <br>Mit knapp 22 % bleibt unentdeckt, dass die Defektquote bei 15 % liegt."
+},
+{ block: 16, title: "Linksseitiger vs. rechtsseitiger Test",
+  aufgabe: "Wann verwendet man einen linksseitigen, wann einen rechtsseitigen Hypothesentest?",
+  hint: "Es kommt auf die Richtung der Vermutung in <span class=\"math\">H<sub>1</sub></span> an.",
+  solution: "<strong>Rechtsseitig</strong>: <span class=\"math\">H<sub>1</sub>: p > p<sub>0</sub></span> – Vermutung lautet, <span class=\"math\">p</span> sei <em>größer</em>. Ablehnungsbereich liegt bei großen Werten (rechts). <br><strong>Linksseitig</strong>: <span class=\"math\">H<sub>1</sub>: p < p<sub>0</sub></span> – Vermutung lautet, <span class=\"math\">p</span> sei <em>kleiner</em>. Ablehnungsbereich liegt bei kleinen Werten (links)."
+},
+
+];
+
+// ============================================================
+// LOGIK: Rendering, Klick-Handling, Speichern
+// ============================================================
+
+const STORAGE_KEY = 'kann_ich_trainer_v1';
+
+function loadStatus() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) { return {}; }
+}
+function saveStatus(s) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch (e) {}
+}
+
+let status = loadStatus();
+
+function setStatus(idx, val) {
+  status[idx] = val;
+  saveStatus(status);
+  renderItemStatus(idx);
+  updateSummary();
+}
+
+function renderItemStatus(idx) {
+  const el = document.getElementById('status-' + idx);
+  if (!el) return;
+  const s = status[idx];
+  el.classList.remove('status-offen','status-ok','status-uebe');
+  if (s === 'ok') { el.textContent = '✓ Kann ich'; el.classList.add('status-ok'); }
+  else if (s === 'uebe') { el.textContent = '↻ Muss ich üben'; el.classList.add('status-uebe'); }
+  else { el.textContent = 'offen'; el.classList.add('status-offen'); }
+}
+
+function updateSummary() {
+  let ok = 0, uebe = 0, offen = 0;
+  data.forEach((_, i) => {
+    if (status[i] === 'ok') ok++;
+    else if (status[i] === 'uebe') uebe++;
+    else offen++;
+  });
+  document.getElementById('cnt-ok').textContent = ok;
+  document.getElementById('cnt-uebe').textContent = uebe;
+  document.getElementById('cnt-offen').textContent = offen;
+  document.getElementById('cnt-total').textContent = data.length;
+  const pct = data.length ? Math.round(100 * ok / data.length) : 0;
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  // Block-Badges
+  const blockStats = {};
+  data.forEach((d, i) => {
+    if (!blockStats[d.block]) blockStats[d.block] = { ok: 0, total: 0 };
+    blockStats[d.block].total++;
+    if (status[i] === 'ok') blockStats[d.block].ok++;
+  });
+  Object.keys(blockStats).forEach(b => {
+    const badge = document.getElementById('badge-block-' + b);
+    if (badge) badge.textContent = blockStats[b].ok + ' / ' + blockStats[b].total + ' ✓';
+  });
+}
+
+function toggleItem(idx) {
+  document.getElementById('item-' + idx).classList.toggle('open');
+}
+
+function resetAll() {
+  if (!confirm('Wirklich alle Markierungen zurücksetzen?')) return;
+  status = {};
+  saveStatus(status);
+  data.forEach((_, i) => renderItemStatus(i));
+  updateSummary();
+}
+
+function render() {
+  data.forEach((item, idx) => {
+    const blockEl = document.getElementById('block-' + item.block);
+    if (!blockEl) return;
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.id = 'item-' + idx;
+    div.innerHTML = `
+      <div class="item-title" onclick="toggleItem(${idx})">
+        <span>${idx + 1}. ${item.title}</span>
+        <span class="item-status status-offen" id="status-${idx}">offen</span>
+      </div>
+      <div class="item-body">
+        <div class="aufgabe"><strong>Aufgabe:</strong> ${item.aufgabe}</div>
+        <details class="sub hint">
+          <summary>💡 Lösungshinweis</summary>
+          <div>${item.hint}</div>
+        </details>
+        <details class="sub solution">
+          <summary>✅ Musterlösung</summary>
+          <div>${item.solution}</div>
+        </details>
+        <div class="buttons">
+          <button class="btn btn-ok" onclick="setStatus(${idx}, 'ok')">Kann ich</button>
+          <button class="btn btn-uebe" onclick="setStatus(${idx}, 'uebe')">Muss ich noch üben</button>
+        </div>
+      </div>
+    `;
+    blockEl.appendChild(div);
+    renderItemStatus(idx);
+  });
+  updateSummary();
+}
+
+render();
+</script>
+
+</body>
+</html>
